@@ -1,20 +1,23 @@
 #include <Wire.h>
 #include <VL53L0X.h>
 
-VL53L0X sensor7;
 /*
+VL53L0X sensor7;
 VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
 VL53L0X sensor5;
+*/
 VL53L0X sensor1;
- */
+
+
 int a;
 int b;
 int c;
 int d;
 int e;
 int f;
+
 
 void setup()
 {
@@ -41,7 +44,7 @@ void setup()
 
 
   Serial.begin (9600);
-
+/*
   digitalWrite(4, HIGH);
   delay(150);
   Serial.println("00");
@@ -92,26 +95,28 @@ void setup()
   delay(150);
   Serial.println("13");
   sensor1.init(true);
-
+*/
   Serial.println("14");
   delay(100);
   sensor1.setAddress((uint8_t)06);
   Serial.println("15");
 
   Serial.println("addresses set");
-
-sensor7.startContinuous();
-sensor2.startContinuous();
-sensor3.startContinuous();
-sensor4.startContinuous();
-sensor5.startContinuous();
-sensor1.startContinuous();
+/*
+  sensor7.startContinuous();
+  sensor2.startContinuous();
+  sensor3.startContinuous();
+  sensor4.startContinuous();
+  sensor5.startContinuous();
+*/
+  sensor1.startContinuous();
 
 }
 
+
 void loop()
 {
-  
+/*  
   a=sensor7.readRangeContinuousMillimeters();
   Serial.print(a);
   Serial.print("  ");
@@ -127,9 +132,9 @@ void loop()
   e=sensor5.readRangeContinuousMillimeters();
   Serial.print(e);
   Serial.print("  ");
+*/
   f=sensor1.readRangeContinuousMillimeters();
   Serial.println(f);
 
   //delay(100);
 }
-
