@@ -2,11 +2,13 @@
 #include <VL53L0X.h>
 
 VL53L0X sensor1;
+/*
 VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
 VL53L0X sensor5;
 VL53L0X sensor6;
+ */
 int a;
 int b;
 int c;
@@ -16,18 +18,21 @@ int f;
 
 void setup()
 {
-  pinMode(9, OUTPUT);
+  pinMode(15, OUTPUT);
+
+/*
   pinMode(8, OUTPUT);
   pinMode(7, OUTPUT);
   pinMode(6, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(4, OUTPUT);
+ */
   digitalWrite(4, LOW);
   digitalWrite(5, LOW);
   digitalWrite(6, LOW);
   digitalWrite(7, LOW);
   digitalWrite(8, LOW);
-  digitalWrite(9, LOW);
+  digitalWrite(15, LOW);
 
   delay(500);
   Wire.begin();
@@ -81,7 +86,7 @@ void setup()
   sensor5.setAddress((uint8_t)05);
   Serial.println("12");
   
-  digitalWrite(9, HIGH);
+  digitalWrite(15, HIGH);
   delay(150);
   Serial.println("13");
   sensor6.init(true);
