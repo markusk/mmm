@@ -3,6 +3,7 @@
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 uint16_t distance1 = 0;
+bool note1active = false;
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
 // Second parameter is note-on/note-off, combined with the channel.
@@ -75,17 +76,31 @@ void loop()
 
     if (distance1 < 40)
     {
+      //----------
+      // NOTE on
+      //----------
       Serial.println("Sending note on");
       noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+      note1active = true;
       MidiUSB.flush();
-      delay(500);
-      Serial.println("Sending note off");
-      noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-      MidiUSB.flush();
-      delay(1500);
 
       // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
     }
+    else
+    {
+      if (note1active)
+      {
+        //----------
+        // NOTE off
+        //----------
+        note1active = false;
+        Serial.println("Sending note off");
+        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+        MidiUSB.flush();
+
+        // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+      }
+    } // distance (obstacle detected)
   }
   else
   {
