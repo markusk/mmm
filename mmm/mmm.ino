@@ -2,6 +2,7 @@
 #include "MIDIUSB.h"
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+uint16_t distance1 = 0;
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
 // Second parameter is note-on/note-off, combined with the channel.
@@ -59,15 +60,35 @@ void setup() {
 }
 
 
-void loop() {
+void loop()
+{
   VL53L0X_RangingMeasurementData_t measure;
     
   Serial.print("Reading a measurement... ");
   lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
-  if (measure.RangeStatus != 4) {  // phase failures have incorrect data
-    Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
-  } else {
+  if (measure.RangeStatus != 4) // phase failures have incorrect data
+  {  
+    distance1 = measure.RangeMilliMeter;
+    Serial.print("Distance (mm): ");
+    Serial.println(distance1);
+
+    if (distance1 < 40)
+    {
+      Serial.println("Sending note on");
+      noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+      MidiUSB.flush();
+      delay(500);
+      Serial.println("Sending note off");
+      noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+      MidiUSB.flush();
+      delay(1500);
+
+      // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+    }
+  }
+  else
+  {
     Serial.println(" out of range ");
   }
     
