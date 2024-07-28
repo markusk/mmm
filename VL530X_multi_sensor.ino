@@ -21,7 +21,7 @@ int f;
 
 void setup()
 {
-  // Sensor 1, Pin 15
+  // Sensor 1, Pin 15 (SHUTDOWN)
   pinMode(15, OUTPUT);
 
 /*
@@ -40,9 +40,11 @@ void setup()
   digitalWrite(15, LOW);
 
   delay(500);
+
+  // Start I2C
   Wire.begin();
 
-
+  // only for debugging purposes
   Serial.begin (9600);
 /*
   digitalWrite(4, HIGH);
