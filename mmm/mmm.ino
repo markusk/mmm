@@ -74,7 +74,7 @@ void loop()
     Serial.print("Distance (mm): ");
     Serial.println(distance1);
 
-    if (distance1 < 40)
+    if (distance1 < 200)
     {
       //----------
       // NOTE on
