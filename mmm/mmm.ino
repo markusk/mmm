@@ -75,8 +75,8 @@ void loop()
   if (measure.RangeStatus != 4) // phase failures have incorrect data
   {  
     distance1 = measure.RangeMilliMeter;
-    Serial.print("Distance (mm): ");
-    Serial.println(distance1);
+    //Serial.print("Distance (mm): ");
+    //Serial.println(distance1);
 
     if (distance1 < 200)
     {
@@ -90,6 +90,14 @@ void loop()
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         note1active = true;
         MidiUSB.flush();
+        //----------
+        // NOTE off
+        //----------
+        note1active = false;
+        Serial.println("Sending note off");
+        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+        MidiUSB.flush();
+
 
         // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
       }
@@ -99,6 +107,13 @@ void loop()
       // if note is playing
       if (note1active)
       {
+        //----------
+        // NOTE on
+        //----------
+        Serial.println("Sending note on");
+        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+        note1active = true;
+        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
@@ -127,7 +142,7 @@ void loop()
       // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
     }
     
-    Serial.println(" out of range ");
+    //Serial.println(" out of range ");
   }
   
   delay(100);
