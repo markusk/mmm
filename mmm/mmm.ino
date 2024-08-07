@@ -80,18 +80,23 @@ void loop()
 
     if (distance1 < 200)
     {
-      //----------
-      // NOTE on
-      //----------
-      Serial.println("Sending note on");
-      noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-      note1active = true;
-      MidiUSB.flush();
+      // when note is not already playing, start it
+      if (note1active == false)
+      {
+        //----------
+        // NOTE on
+        //----------
+        Serial.println("Sending note on");
+        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+        note1active = true;
+        MidiUSB.flush();
 
-      // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+        // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+      }
     }
     else
     {
+      // if note is playing
       if (note1active)
       {
         //----------
@@ -108,6 +113,20 @@ void loop()
   }
   else
   {
+    // if note is playing
+    if (note1active)
+    {
+      //----------
+      // NOTE off
+      //----------
+      note1active = false;
+      Serial.println("Sending note off");
+      noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+      MidiUSB.flush();
+
+      // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+    }
+    
     Serial.println(" out of range ");
   }
   
