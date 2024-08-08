@@ -72,11 +72,11 @@ void setup()
   */
 
   if (!lox.begin()) {
-    delay(100);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
     Serial.println(F("Failed to boot VL53L0X"));
     // digitalWrite(LED_BUILTIN, HIGH);
+    // delay(100);
+    // digitalWrite(LED_BUILTIN, LOW);
+    // delay(100);
   }
   
   // LED on
@@ -123,6 +123,7 @@ void loop()
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         // Wait for all messages to actually be sent.
+        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
@@ -135,6 +136,7 @@ void loop()
         // Wait for all messages to actually be sent.
         MidiUSB.flush();
 
+        Serial.println("Track 1 turned OFF.");
       }
     } // klotz1 is up
     else
@@ -148,6 +150,7 @@ void loop()
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         // Wait for all messages to actually be sent.
+        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
@@ -155,17 +158,20 @@ void loop()
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
 
         // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+
         // store track state
         track1 = ON;
         Serial.println("Track 1 turned ON.");
-        // Wait for all messages to actually be sent.
-        MidiUSB.flush();
       }
     } // klotz 1 is down
     
     //Serial.println(" out of range ");
   } // measurement failure
   else
+  {
+    Serial.println("Sensor error: Phase failures have incorrect data!");
+  }
   
   /// @todo needed?
   delay(100);
