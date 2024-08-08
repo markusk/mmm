@@ -73,7 +73,6 @@ void setup()
   }
   
   // power 
-  //Serial.println(F("VL53L0X API Simple Ranging example\n\n")); 
   // LED on
   digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -89,7 +88,6 @@ void loop()
   if (measure.RangeStatus != 4) // phase failures have incorrect data
   {
     distance1 = measure.RangeMilliMeter;
-    Serial.println(distance1);
 
     //----------------------
     // klotz 1 up or down?
