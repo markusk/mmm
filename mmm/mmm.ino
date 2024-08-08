@@ -71,6 +71,7 @@ void setup()
     digitalWrite(LED_BUILTIN, LOW);
     delay(100);
   }
+  
   // power 
   //Serial.println(F("VL53L0X API Simple Ranging example\n\n")); 
   // LED on
@@ -97,12 +98,12 @@ void loop()
     if (distance1 > 200)
     {
       klotz1 = UP;
-      serial.println("Klotz 1 UP");
+      Serial.println("Klotz 1 UP");
     }
     else
     {
       klotz1 = DOWN;
-      serial.println("Klotz 1 DOWN");
+      // Serial.println("Klotz 1 DOWN");
     }
 
     // klotz 1 is up -> STOP!
@@ -113,18 +114,19 @@ void loop()
         //----------
         // NOTE on
         //----------
-        Serial.println("Sending note on");
+        // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         MidiUSB.flush();
         //----------
         // NOTE off
         //----------
-        Serial.println("Sending note off");
+        // Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
         MidiUSB.flush();
 
         // store track state
         track1 = OFF;
+        Serial.println("Track 1 turned OFF.");
       }
     } // klotz1 is up
     else
@@ -135,18 +137,19 @@ void loop()
         //----------
         // NOTE on
         //----------
-        Serial.println("Sending note on");
+        // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         MidiUSB.flush();
         //----------
         // NOTE off
         //----------
-        Serial.println("Sending note off");
+        // Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
         MidiUSB.flush();
 
         // store track state
         track1 = ON;
+        Serial.println("Track 1 turned ON.");
       }
     } // klotz 1 is down
     
