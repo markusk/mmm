@@ -4,6 +4,7 @@
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 uint16_t distance1 = 0;
 bool note1active = false;
+bool klotz1liegt = false;
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
 // Second parameter is note-on/note-off, combined with the channel.
@@ -81,8 +82,9 @@ void loop()
     if (distance1 < 200)
     {
       // when note is not already playing, start it
-      if (note1active == false)
+      if (klotz1liegt == false)
       {
+        klotz1liegt = true;
         //----------
         // NOTE on
         //----------
@@ -104,6 +106,9 @@ void loop()
     }
     else
     {
+      // distance too big (kein Klotz)
+      klotz1liegt = false;
+
       // if note is playing
       if (note1active)
       {
