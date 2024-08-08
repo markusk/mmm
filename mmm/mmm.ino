@@ -89,7 +89,6 @@ void loop()
   if (measure.RangeStatus != 4) // phase failures have incorrect data
   {
     distance1 = measure.RangeMilliMeter;
-    Serial.print("Distance (mm): ");
     Serial.println(distance1);
 
     //----------------------
