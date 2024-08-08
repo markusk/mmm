@@ -57,7 +57,7 @@ void setup()
   // (times 10 to convert into mm for the sensor measurement)
   klotzThreshold *= 10;
 
-  pinMode(LED_BUILTIN, OUTPUT);
+  //pinMode(LED_BUILTIN, OUTPUT);
 
  /*
   // wait until serial port opens for native USB devices
@@ -80,7 +80,7 @@ void setup()
   }
   
   // LED on
-  digitalWrite(LED_BUILTIN, HIGH);
+  // digitalWrite(LED_BUILTIN, HIGH);
 }
 
 
