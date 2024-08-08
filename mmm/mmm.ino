@@ -3,8 +3,16 @@
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
 uint16_t distance1 = 0;
-bool note1active = false;
-bool klotz1liegt = false;
+bool ON = true;
+bool OFF = false;
+bool UP = true;
+bool DOWN = false;
+
+// distance in mm when a klotz is recognised as "UP"
+int klotzThreshold = 20;
+
+bool track1 = ON;
+bool klotz1 = DOWN;
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
 // Second parameter is note-on/note-off, combined with the channel.
@@ -34,7 +42,11 @@ void controlChange(byte channel, byte control, byte value)
 }
 
 
-void setup() {
+void setup()
+{
+  // (times 10 to convert into mm for the sensor measurement)
+  klotzThreshold *= 10;
+
   // for debugging messageas only
   Serial.begin(115200);
 
@@ -74,81 +86,73 @@ void loop()
   lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
   if (measure.RangeStatus != 4) // phase failures have incorrect data
-  {  
+  {
     distance1 = measure.RangeMilliMeter;
-    //Serial.print("Distance (mm): ");
-    //Serial.println(distance1);
+    Serial.print("Distance (mm): ");
+    Serial.println(distance1);
 
-    if (distance1 < 200)
+    //----------------------
+    // klotz 1 up or down?
+    //----------------------
+    if (distance1 > 200)
     {
-      // when note is not already playing, start it
-      if (klotz1liegt == false)
-      {
-        klotz1liegt = true;
-        //----------
-        // NOTE on
-        //----------
-        Serial.println("Sending note on");
-        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-        note1active = true;
-        MidiUSB.flush();
-        //----------
-        // NOTE off
-        //----------
-        note1active = false;
-        Serial.println("Sending note off");
-        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-        MidiUSB.flush();
-
-
-        // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
-      }
+      klotz1 = UP;
+      serial.println("Klotz 1 UP");
     }
     else
     {
-      // distance too big (kein Klotz)
-      klotz1liegt = false;
+      klotz1 = DOWN;
+      serial.println("Klotz 1 DOWN");
+    }
 
-      // if note is playing
-      if (note1active)
+    // klotz 1 is up -> STOP!
+    if (klotz1 == UP)
+    {
+      if (track1 == ON)
       {
         //----------
         // NOTE on
         //----------
         Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-        note1active = true;
         MidiUSB.flush();
         //----------
         // NOTE off
         //----------
-        note1active = false;
         Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
         MidiUSB.flush();
 
-        // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
+        // store track state
+        track1 = OFF;
       }
-    } // distance (obstacle detected)
-  }
-  else
-  {
-    // if note is playing
-    if (note1active)
+    } // klotz1 is up
+    else
     {
-      //----------
-      // NOTE off
-      //----------
-      note1active = false;
-      Serial.println("Sending note off");
-      noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-      MidiUSB.flush();
+      // klotz 1 is down -> PLAY!
+      if (track1 == OFF)
+      {
+        //----------
+        // NOTE on
+        //----------
+        Serial.println("Sending note on");
+        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+        MidiUSB.flush();
+        //----------
+        // NOTE off
+        //----------
+        Serial.println("Sending note off");
+        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+        MidiUSB.flush();
 
-      // controlChange(0, 10, 65); // Set the value of controller 10 on channel 0 to 65    }
-    }
+        // store track state
+        track1 = ON;
+      }
+    } // klotz 1 is down
     
     //Serial.println(" out of range ");
   }
   
+  /// @todo needed?
   delay(100);
 }
