@@ -72,11 +72,11 @@ void setup()
   */
 
   if (!lox.begin()) {
-    //Serial.println(F("Failed to boot VL53L0X"));
     digitalWrite(LED_BUILTIN, HIGH);
     delay(100);
     digitalWrite(LED_BUILTIN, LOW);
     delay(100);
+    Serial.println(F("Failed to boot VL53L0X"));
   }
   
   // LED on
