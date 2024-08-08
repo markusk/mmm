@@ -44,11 +44,13 @@ void controlChange(byte channel, byte control, byte value)
 
 void setup()
 {
-  // (times 10 to convert into mm for the sensor measurement)
-  klotzThreshold *= 10;
-
   // for debugging messageas only
   Serial.begin(115200);
+  // power 
+  Serial.println("*** Let's go! ***"); 
+
+  // (times 10 to convert into mm for the sensor measurement)
+  klotzThreshold *= 10;
 
   pinMode(LED_BUILTIN, OUTPUT);
 
@@ -72,8 +74,6 @@ void setup()
     delay(100);
   }
   
-  // power 
-  Serial.println(F("Let's go!\n\n")); 
   // LED on
   digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -81,6 +81,7 @@ void setup()
 
 void loop()
 {
+  /// @todo shouln't this line be global!?
   VL53L0X_RangingMeasurementData_t measure;
     
   //Serial.print("Reading a measurement... ");
@@ -156,7 +157,7 @@ void loop()
     } // klotz 1 is down
     
     //Serial.println(" out of range ");
-  }
+  } // measurement failure
   
   /// @todo needed?
   delay(100);
