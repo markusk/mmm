@@ -2,6 +2,9 @@
 #include "MIDIUSB.h"
 
 Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+
+
+// general stuff
 uint16_t distance1 = 0;
 bool ON = true;
 bool OFF = false;
@@ -11,8 +14,10 @@ bool DOWN = false;
 // distance in mm when a klotz is recognised as "UP"
 int klotzThreshold = 20;
 
+// all klotzes
 bool track1 = ON;
 bool klotz1 = DOWN;
+
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
 // Second parameter is note-on/note-off, combined with the channel.
@@ -83,7 +88,7 @@ void loop()
 {
   /// @todo shouln't this line be global!?
   VL53L0X_RangingMeasurementData_t measure;
-    
+
   //Serial.print("Reading a measurement... ");
   lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
