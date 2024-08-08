@@ -117,18 +117,22 @@ void loop()
     {
       if (track1 == ON)
       {
+// First parameter is the event type, combined with the channel.
+// Second parameter is the control number number (0-119).
+// Third parameter is the control value (0-127).
+controlChange(0, 0, 0);
         //----------
         // NOTE on
         //----------
         // Serial.println("Sending note on");
-        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+//        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         // Wait for all messages to actually be sent.
-        MidiUSB.flush();
+//        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
         // Serial.println("Sending note off");
-        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+//        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
 
         // store track state
         track1 = OFF;
@@ -144,18 +148,22 @@ void loop()
       // klotz 1 is down -> PLAY!
       if (track1 == OFF)
       {
+// First parameter is the event type, combined with the channel.
+// Second parameter is the control number number (0-119).
+// Third parameter is the control value (0-127).
+controlChange(0, 0, 127);
         //----------
         // NOTE on
         //----------
         // Serial.println("Sending note on");
-        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+//        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
         // Wait for all messages to actually be sent.
-        MidiUSB.flush();
+//        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
         // Serial.println("Sending note off");
-        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+//        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
 
         // Wait for all messages to actually be sent.
         MidiUSB.flush();
@@ -168,11 +176,11 @@ void loop()
     
     //Serial.println(" out of range ");
   } // measurement failure
-  else
-  {
-    Serial.println("Sensor error: Phase failures have incorrect data!");
-  }
+  // else
+  // {
+  //   Serial.println("Sensor error: Phase failures have incorrect data!");
+  // }
   
-  /// @todo needed?
-  delay(100);
+  // /// @todo needed?
+  // delay(100);
 }
