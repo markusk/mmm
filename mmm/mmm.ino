@@ -73,6 +73,7 @@ void setup()
   }
   
   // power 
+  Serial.println(F("Let's go!\n\n")); 
   // LED on
   digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -88,6 +89,8 @@ void loop()
   if (measure.RangeStatus != 4) // phase failures have incorrect data
   {
     distance1 = measure.RangeMilliMeter;
+    // Serial.print("Distance (mm): ");
+    // Serial.println(distance1);
 
     //----------------------
     // klotz 1 up or down?
