@@ -116,17 +116,18 @@ void loop()
         //----------
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
         // Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-        MidiUSB.flush();
 
         // store track state
         track1 = OFF;
         Serial.println("Track 1 turned OFF.");
+
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
       }
     } // klotz1 is up
     else
@@ -139,17 +140,18 @@ void loop()
         //----------
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
         // Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-        MidiUSB.flush();
 
         // store track state
         track1 = ON;
         Serial.println("Track 1 turned ON.");
+
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
       }
     } // klotz 1 is down
     
