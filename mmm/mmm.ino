@@ -73,11 +73,9 @@ void toggleNote(byte note)
 }
 
 
+// klotz DOWN = turn music ON
 void klotzDown(byte klotz)
 {
-  const int lastState = ON;
-
-
   if (track1 == OFF)
   {
     // play note
@@ -93,11 +91,9 @@ void klotzDown(byte klotz)
 }
 
 
+// klotz UP = turn music OFF
 void klotzUp(byte klotz)
 {
-  const int lastState = OFF;
-
-
   switch (klotz)
   {
     case 1:
@@ -107,6 +103,10 @@ void klotzUp(byte klotz)
         toggleNote(64);
         // store track state
         track1 = OFF;
+        
+        Serial.print("Track ");
+        Serial.print(klotz);
+        Serial.println(" turned OFF.");
       }
       break;
     case 2:
@@ -230,7 +230,7 @@ void loop()
     // Serial.println("Sensor error: Phase failures have incorrect data!");
 
     // klotz 1 up -> STOP
-    Serial.println("Klotz 1 UP");
+    //Serial.println("Klotz 1 UP");
     klotz1 = UP;
 
     // STOP playing
