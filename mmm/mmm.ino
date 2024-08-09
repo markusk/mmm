@@ -171,7 +171,8 @@ void setup()
   Serial.println("Adafruit VL53L0X test");
   */
 
-  if (!lox.begin()) {
+  if (!lox.begin())
+  {
     Serial.println(F("Failed to boot VL53L0X"));
     // digitalWrite(LED_BUILTIN, HIGH);
     // delay(100);
@@ -220,7 +221,7 @@ void loop()
       klotzDown(1);
     }
     
-  } // measurement failure
+  } // measurement failure (or object too far away!)
   else
   {
     //-----------------------------
@@ -236,7 +237,4 @@ void loop()
     // STOP playing
     klotzUp(1);
    }
-  
-  // /// @todo needed?
-  // delay(100);
 }
