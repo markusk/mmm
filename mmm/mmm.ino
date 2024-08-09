@@ -106,16 +106,24 @@ void klotzDown(byte klotz)
       {
         // play note 64 (middle C)
         toggleNote(64);
-
         // store track state
         track1 = ON;
-
         Serial.print("Track ");
         Serial.print(klotz);
         Serial.println(" turned ON.");
       }
-      break:
+      break;
     case 2:
+      if (track2 == OFF)
+      {
+        // play note 65
+        toggleNote(64);
+        // store track state
+        track2 = ON;
+        Serial.print("Track ");
+        Serial.print(klotz);
+        Serial.println(" turned ON.");
+      }
       break;
     case 3:
       break;
@@ -137,6 +145,7 @@ void klotzDown(byte klotz)
       break;
     case 12:
       break;
+  }
 }
 
 
