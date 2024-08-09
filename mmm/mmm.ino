@@ -130,22 +130,26 @@ void loop()
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
 
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+
         // Avoid  bouncing
         delay(100);
 
-        // Wait for all messages to actually be sent.
-//        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
         // Serial.println("Sending note off");
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
 
-        // store track state
-        track1 = OFF;
-
         // Wait for all messages to actually be sent.
         MidiUSB.flush();
+
+        // Avoid  bouncing
+        delay(100);
+
+        // store track state
+        track1 = OFF;
 
         Serial.println("Track 1 turned OFF.");
       }
@@ -168,11 +172,12 @@ void loop()
         // Serial.println("Sending note on");
         noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
 
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+
         // Avoid  bouncing
         delay(100);
 
-        // Wait for all messages to actually be sent.
-//        MidiUSB.flush();
         //----------
         // NOTE off
         //----------
@@ -180,7 +185,10 @@ void loop()
         noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
 
         // Wait for all messages to actually be sent.
-//        MidiUSB.flush();
+        MidiUSB.flush();
+
+        // Avoid  bouncing
+        delay(100);
 
         // store track state
         track1 = ON;
