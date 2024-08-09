@@ -250,8 +250,6 @@ void setup()
 
 void loop()
 {
-  VL53L0X_RangingMeasurementData_t measure;
-
   //Serial.print("Reading a measurement... ");
   lox1.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
