@@ -266,9 +266,8 @@ void loop()
     if (distance1 > 200)
     {
       // klotz 1 up -> STOP
-      Serial.println("Klotz 1 UP");
+      //Serial.println("Klotz 1 UP");
       klotz1 = UP;
-
       // STOP playing
       klotzUp(1);
     }
@@ -277,7 +276,6 @@ void loop()
       // klotz 1 down -> PLAY
       // Serial.println("Klotz 1 DOWN");
       klotz1 = DOWN;
-
       // PLAY
       klotzDown(1);
     }
@@ -292,7 +290,7 @@ void loop()
     // Serial.println("Sensor error: Phase failures have incorrect data!");
 
     // klotz 1 up -> STOP
-    //Serial.println("Klotz 1 UP");
+    //Serial.println("Klotz 1 too far away");
     klotz1 = UP;
 
     // STOP playing
