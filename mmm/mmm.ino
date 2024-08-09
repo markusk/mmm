@@ -1,7 +1,9 @@
 #include "Adafruit_VL53L0X.h"
 #include "MIDIUSB.h"
 
+// address we will assign if dual sensor is present
 Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
+Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
 
 /// @todo shouln't this line be global!?
 VL53L0X_RangingMeasurementData_t measure;
