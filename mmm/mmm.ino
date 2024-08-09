@@ -96,8 +96,8 @@ void toggleNote(byte note)
 }
 
 
-// block DOWN = turn music ON
-void blockDown(byte block)
+// block lies DOWN = turn music ON
+void blockLies(byte block)
 {
    switch (block)
   {
@@ -149,8 +149,8 @@ void blockDown(byte block)
 }
 
 
-// block UP = turn music OFF
-void blockUp(byte block)
+// block is lifted (UP) = turn music OFF
+void blockIsLifted(byte block)
 {
   switch (block)
   {
@@ -269,7 +269,7 @@ void loop()
       //Serial.println("block 1 UP");
       block1 = UP;
       // STOP playing
-      blockUp(1);
+      blockIsLifted(1);
     }
     else
     {
@@ -277,9 +277,8 @@ void loop()
       // Serial.println("block 1 DOWN");
       block1 = DOWN;
       // PLAY
-      blockDown(1);
+      blockLies(1);
     }
-    
   } // measurement failure (or object too far away!)
   else
   {
@@ -294,6 +293,6 @@ void loop()
     block1 = UP;
 
     // STOP playing
-    blockUp(1);
+    blockIsLifted(1);
    }
 }
