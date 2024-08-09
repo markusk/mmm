@@ -47,6 +47,91 @@ void controlChange(byte channel, byte control, byte value)
 }
 
 
+void klotzDown()
+{
+  if (track1 == OFF)
+  {
+    /* test
+    // First parameter is the event type, combined with the channel.
+    // Second parameter is the control number number (0-119).
+    // Third parameter is the control value (0-127).
+    controlChange(0, 0, 127);
+    */
+    
+    //----------
+    // NOTE on
+    //----------
+    // Serial.println("Sending note on");
+    noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+
+    // Wait for all messages to actually be sent.
+    MidiUSB.flush();
+
+    // Avoid  bouncing
+    delay(100);
+
+    //----------
+    // NOTE off
+    //----------
+    // Serial.println("Sending note off");
+    noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+
+    // Wait for all messages to actually be sent.
+    MidiUSB.flush();
+
+    // Avoid  bouncing
+    delay(100);
+
+    // store track state
+    track1 = ON;
+    Serial.println("Track 1 turned ON.");
+  }
+}
+
+
+void klotzUp()
+{
+  if (track1 == ON)
+  {
+    /* test
+    // First parameter is the event type, combined with the channel.
+    // Second parameter is the control number number (0-119).
+    // Third parameter is the control value (0-127).
+    controlChange(0, 0, 0);
+    */
+
+    //----------
+    // NOTE on
+    //----------
+    // Serial.println("Sending note on");
+    noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+
+    // Wait for all messages to actually be sent.
+    MidiUSB.flush();
+
+    // Avoid  bouncing
+    delay(100);
+
+    //----------
+    // NOTE off
+    //----------
+    // Serial.println("Sending note off");
+    noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+
+    // Wait for all messages to actually be sent.
+    MidiUSB.flush();
+
+    // Avoid  bouncing
+    delay(100);
+
+    // store track state
+    track1 = OFF;
+
+    Serial.println("Track 1 turned OFF.");
+  }
+}
+
+
 void setup()
 {
   // for debugging messageas only
@@ -115,85 +200,12 @@ void loop()
     // klotz 1 is up -> STOP!
     if (klotz1 == UP)
     {
-      if (track1 == ON)
-      {
-        /* test
-        // First parameter is the event type, combined with the channel.
-        // Second parameter is the control number number (0-119).
-        // Third parameter is the control value (0-127).
-        controlChange(0, 0, 0);
-        */
-
-        //----------
-        // NOTE on
-        //----------
-        // Serial.println("Sending note on");
-        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-
-        // Wait for all messages to actually be sent.
-        MidiUSB.flush();
-
-        // Avoid  bouncing
-        delay(100);
-
-        //----------
-        // NOTE off
-        //----------
-        // Serial.println("Sending note off");
-        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-
-        // Wait for all messages to actually be sent.
-        MidiUSB.flush();
-
-        // Avoid  bouncing
-        delay(100);
-
-        // store track state
-        track1 = OFF;
-
-        Serial.println("Track 1 turned OFF.");
-      }
+      klotzUp();
     } // klotz1 is up
     else
     {
       // klotz 1 is down -> PLAY!
-      if (track1 == OFF)
-      {
-        /* test
-        // First parameter is the event type, combined with the channel.
-        // Second parameter is the control number number (0-119).
-        // Third parameter is the control value (0-127).
-        controlChange(0, 0, 127);
-        */
-        
-        //----------
-        // NOTE on
-        //----------
-        // Serial.println("Sending note on");
-        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-
-        // Wait for all messages to actually be sent.
-        MidiUSB.flush();
-
-        // Avoid  bouncing
-        delay(100);
-
-        //----------
-        // NOTE off
-        //----------
-        // Serial.println("Sending note off");
-        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-
-        // Wait for all messages to actually be sent.
-        MidiUSB.flush();
-
-        // Avoid  bouncing
-        delay(100);
-
-        // store track state
-        track1 = ON;
-        Serial.println("Track 1 turned ON.");
-      }
+      klotzDown();
     } // klotz 1 is down
     
     //Serial.println(" out of range ");
