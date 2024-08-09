@@ -3,6 +3,8 @@
 
 Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
 
+/// @todo shouln't this line be global!?
+VL53L0X_RangingMeasurementData_t measure;
 
 // general stuff
 uint16_t distance1 = 0;
@@ -248,7 +250,6 @@ void setup()
 
 void loop()
 {
-  /// @todo shouln't this line be global!?
   VL53L0X_RangingMeasurementData_t measure;
 
   //Serial.print("Reading a measurement... ");
