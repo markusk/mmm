@@ -14,9 +14,32 @@ bool DOWN = false;
 // distance in mm when a klotz is recognised as "UP"
 int klotzThreshold = 20;
 
-// all klotzes
+// all tracks
 bool track1 = ON;
+bool track2 = ON;
+bool track3 = ON;
+bool track4 = ON;
+bool track5 = ON;
+bool track6 = ON;
+bool track7 = ON;
+bool track8 = ON;
+bool track9 = ON;
+bool track10 = ON;
+bool track11 = ON;
+bool track12 = ON;
+// all klotzes
 bool klotz1 = DOWN;
+bool klotz2 = DOWN;
+bool klotz3 = DOWN;
+bool klotz4 = DOWN;
+bool klotz5 = DOWN;
+bool klotz6 = DOWN;
+bool klotz7 = DOWN;
+bool klotz8 = DOWN;
+bool klotz9 = DOWN;
+bool klotz10 = DOWN;
+bool klotz11 = DOWN;
+bool klotz12 = DOWN;
 
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
@@ -76,39 +99,22 @@ void toggleNote(byte note)
 // klotz DOWN = turn music ON
 void klotzDown(byte klotz)
 {
-  if (track1 == OFF)
-  {
-    // play note
-    toggleNote(64);
-
-    // store track state
-    track1 = ON;
-
-    Serial.print("Track ");
-    Serial.print(klotz);
-    Serial.println(" turned ON.");
-  }
-}
-
-
-// klotz UP = turn music OFF
-void klotzUp(byte klotz)
-{
-  switch (klotz)
+   switch (klotz)
   {
     case 1:
-      if (track1 == ON)
+      if (track1 == OFF)
       {
-        // play note
+        // play note 64 (middle C)
         toggleNote(64);
+
         // store track state
-        track1 = OFF;
-        
+        track1 = ON;
+
         Serial.print("Track ");
         Serial.print(klotz);
-        Serial.println(" turned OFF.");
+        Serial.println(" turned ON.");
       }
-      break;
+      break:
     case 2:
       break;
     case 3:
@@ -131,13 +137,59 @@ void klotzUp(byte klotz)
       break;
     case 12:
       break;
-    case 13:
+}
+
+
+// klotz UP = turn music OFF
+void klotzUp(byte klotz)
+{
+  switch (klotz)
+  {
+    case 1:
+      if (track1 == ON)
+      {
+        // play note 64 (middle C)
+        toggleNote(64);
+        // store track state
+        track1 = OFF;
+        
+        Serial.print("Track ");
+        Serial.print(klotz);
+        Serial.println(" turned OFF.");
+      }
       break;
-    case 14:
+    case 2:
+      if (track2 == ON)
+      {
+        // play note 65
+        toggleNote(65);
+        // store track state
+        track2 = OFF;
+        
+        Serial.print("Track ");
+        Serial.print(klotz);
+        Serial.println(" turned OFF.");
+      }
       break;
-    case 15:
+    case 3:
       break;
-    case 16:
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    case 8:
+      break;
+    case 9:
+      break;
+    case 10:
+      break;
+    case 11:
+      break;
+    case 12:
       break;
   }
 
