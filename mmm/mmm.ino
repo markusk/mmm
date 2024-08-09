@@ -30,16 +30,17 @@ void noteOn(byte channel, byte pitch, byte velocity)
   MidiUSB.sendMIDI(noteOn);
 }
 
+
 void noteOff(byte channel, byte pitch, byte velocity)
 {
   midiEventPacket_t noteOff = {0x08, 0x80 | channel, pitch, velocity};
   MidiUSB.sendMIDI(noteOff);
 }
 
-// First parameter is the event type (0x0B = control change).
-// Second parameter is the event type, combined with the channel.
-// Third parameter is the control number number (0-119).
-// Fourth parameter is the control value (0-127).
+
+// First parameter is the event type, combined with the channel.
+// Secomd parameter is the control number number (0-119).
+// Third parameter is the control value (0-127).
 void controlChange(byte channel, byte control, byte value)
 {
   midiEventPacket_t event = {0x0B, 0xB0 | channel, control, value};
@@ -47,26 +48,17 @@ void controlChange(byte channel, byte control, byte value)
 }
 
 
-void klotzDown()
+void klotzDown(int klotz)
 {
   if (track1 == OFF)
   {
-    /* test
-    // First parameter is the event type, combined with the channel.
-    // Second parameter is the control number number (0-119).
-    // Third parameter is the control value (0-127).
-    controlChange(0, 0, 127);
-    */
-    
     //----------
     // NOTE on
     //----------
     // Serial.println("Sending note on");
     noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-
     // Wait for all messages to actually be sent.
     MidiUSB.flush();
-
     // Avoid  bouncing
     delay(100);
 
@@ -75,10 +67,8 @@ void klotzDown()
     //----------
     // Serial.println("Sending note off");
     noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-
     // Wait for all messages to actually be sent.
     MidiUSB.flush();
-
     // Avoid  bouncing
     delay(100);
 
@@ -89,26 +79,52 @@ void klotzDown()
 }
 
 
-void klotzUp()
+void klotzUp(int klotz)
 {
+  switch (klotz)
+  {
+    case 1:
+      break;
+    case 2:
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    case 5:
+      break;
+    case 6:
+      break;
+    case 7:
+      break;
+    case 8:
+      break;
+    case 9:
+      break;
+    case 10:
+      break;
+    case 11:
+      break;
+    case 12:
+      break;
+    case 13:
+      break;
+    case 14:
+      break;
+    case 15:
+      break;
+    case 16:
+      break;
+  }
   if (track1 == ON)
   {
-    /* test
-    // First parameter is the event type, combined with the channel.
-    // Second parameter is the control number number (0-119).
-    // Third parameter is the control value (0-127).
-    controlChange(0, 0, 0);
-    */
-
     //----------
     // NOTE on
     //----------
     // Serial.println("Sending note on");
     noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
-
     // Wait for all messages to actually be sent.
     MidiUSB.flush();
-
     // Avoid  bouncing
     delay(100);
 
@@ -117,10 +133,8 @@ void klotzUp()
     //----------
     // Serial.println("Sending note off");
     noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
-
     // Wait for all messages to actually be sent.
     MidiUSB.flush();
-
     // Avoid  bouncing
     delay(100);
 
