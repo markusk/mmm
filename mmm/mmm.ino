@@ -188,25 +188,23 @@ void loop()
     //----------------------
     if (distance1 > 200)
     {
-      klotz1 = UP;
+      // klotz 1 up -> STOP
       Serial.println("Klotz 1 UP");
+      klotz1 = UP;
+
+      // STOP playing
+      klotzUp();
     }
     else
     {
-      klotz1 = DOWN;
+      // klotz 1 down -> PLAY
       // Serial.println("Klotz 1 DOWN");
+      klotz1 = DOWN;
+
+      // PLAY
+      klotzDown();
     }
 
-    // klotz 1 is up -> STOP!
-    if (klotz1 == UP)
-    {
-      klotzUp();
-    } // klotz1 is up
-    else
-    {
-      // klotz 1 is down -> PLAY!
-      klotzDown();
-    } // klotz 1 is down
     
     //Serial.println(" out of range ");
   } // measurement failure
