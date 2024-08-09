@@ -1,7 +1,7 @@
 #include "Adafruit_VL53L0X.h"
 #include "MIDIUSB.h"
 
-Adafruit_VL53L0X lox = Adafruit_VL53L0X();
+Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
 
 
 // general stuff
@@ -232,7 +232,7 @@ void setup()
   Serial.println("Adafruit VL53L0X test");
   */
 
-  if (!lox.begin())
+  if (!lox1.begin())
   {
     Serial.println(F("Failed to boot VL53L0X"));
     // digitalWrite(LED_BUILTIN, HIGH);
@@ -252,7 +252,7 @@ void loop()
   VL53L0X_RangingMeasurementData_t measure;
 
   //Serial.print("Reading a measurement... ");
-  lox.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+  lox1.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
 
   if (measure.RangeStatus != 4) // phase failures have incorrect data
   {
