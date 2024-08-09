@@ -11,8 +11,8 @@ bool OFF = false;
 bool UP = true;
 bool DOWN = false;
 
-// distance in mm when a klotz is recognised as "UP"
-int klotzThreshold = 20;
+// distance in mm when a block is recognised as "UP"
+int blockThreshold = 20;
 
 // all tracks
 bool track1 = ON;
@@ -27,19 +27,19 @@ bool track9 = ON;
 bool track10 = ON;
 bool track11 = ON;
 bool track12 = ON;
-// all klotzes
-bool klotz1 = DOWN;
-bool klotz2 = DOWN;
-bool klotz3 = DOWN;
-bool klotz4 = DOWN;
-bool klotz5 = DOWN;
-bool klotz6 = DOWN;
-bool klotz7 = DOWN;
-bool klotz8 = DOWN;
-bool klotz9 = DOWN;
-bool klotz10 = DOWN;
-bool klotz11 = DOWN;
-bool klotz12 = DOWN;
+// all wooden blocks
+bool block1 = DOWN;
+bool block2 = DOWN;
+bool block3 = DOWN;
+bool block4 = DOWN;
+bool block5 = DOWN;
+bool block6 = DOWN;
+bool block7 = DOWN;
+bool block8 = DOWN;
+bool block9 = DOWN;
+bool block10 = DOWN;
+bool block11 = DOWN;
+bool block12 = DOWN;
 
 
 // First parameter is the event type (0x09 = note on, 0x08 = note off).
@@ -96,10 +96,10 @@ void toggleNote(byte note)
 }
 
 
-// klotz DOWN = turn music ON
-void klotzDown(byte klotz)
+// block DOWN = turn music ON
+void blockDown(byte block)
 {
-   switch (klotz)
+   switch (block)
   {
     case 1:
       if (track1 == OFF)
@@ -109,7 +109,7 @@ void klotzDown(byte klotz)
         // store track state
         track1 = ON;
         Serial.print("Track ");
-        Serial.print(klotz);
+        Serial.print(block);
         Serial.println(" turned ON.");
       }
       break;
@@ -121,7 +121,7 @@ void klotzDown(byte klotz)
         // store track state
         track2 = ON;
         Serial.print("Track ");
-        Serial.print(klotz);
+        Serial.print(block);
         Serial.println(" turned ON.");
       }
       break;
@@ -149,10 +149,10 @@ void klotzDown(byte klotz)
 }
 
 
-// klotz UP = turn music OFF
-void klotzUp(byte klotz)
+// block UP = turn music OFF
+void blockUp(byte block)
 {
-  switch (klotz)
+  switch (block)
   {
     case 1:
       if (track1 == ON)
@@ -163,7 +163,7 @@ void klotzUp(byte klotz)
         track1 = OFF;
         
         Serial.print("Track ");
-        Serial.print(klotz);
+        Serial.print(block);
         Serial.println(" turned OFF.");
       }
       break;
@@ -176,7 +176,7 @@ void klotzUp(byte klotz)
         track2 = OFF;
         
         Serial.print("Track ");
-        Serial.print(klotz);
+        Serial.print(block);
         Serial.println(" turned OFF.");
       }
       break;
@@ -203,7 +203,7 @@ void klotzUp(byte klotz)
   }
 
   // Serial.print("Track ");
-  // Serial.print(klotz);
+  // Serial.print(block);
   // Serial.println(" turned OFF.");
 }
 
@@ -216,7 +216,7 @@ void setup()
   Serial.println("*** Let's go! ***"); 
 
   // (times 10 to convert into mm for the sensor measurement)
-  klotzThreshold *= 10;
+  blockThreshold *= 10;
 
   //pinMode(LED_BUILTIN, OUTPUT);
 
@@ -261,23 +261,23 @@ void loop()
     // Serial.println(distance1);
 
     //----------------------
-    // klotz 1 up or down?
+    // block 1 up or down?
     //----------------------
     if (distance1 > 200)
     {
-      // klotz 1 up -> STOP
-      //Serial.println("Klotz 1 UP");
-      klotz1 = UP;
+      // block 1 up -> STOP
+      //Serial.println("block 1 UP");
+      block1 = UP;
       // STOP playing
-      klotzUp(1);
+      blockUp(1);
     }
     else
     {
-      // klotz 1 down -> PLAY
-      // Serial.println("Klotz 1 DOWN");
-      klotz1 = DOWN;
+      // block 1 down -> PLAY
+      // Serial.println("block 1 DOWN");
+      block1 = DOWN;
       // PLAY
-      klotzDown(1);
+      blockDown(1);
     }
     
   } // measurement failure (or object too far away!)
@@ -285,15 +285,15 @@ void loop()
   {
     //-----------------------------
     // distance war too big
-    // let's assume klotz is away!
+    // let's assume block is away!
     //-----------------------------
     // Serial.println("Sensor error: Phase failures have incorrect data!");
 
-    // klotz 1 up -> STOP
-    //Serial.println("Klotz 1 too far away");
-    klotz1 = UP;
+    // block 1 up -> STOP
+    //Serial.println("block 1 too far away");
+    block1 = UP;
 
     // STOP playing
-    klotzUp(1);
+    blockUp(1);
    }
 }
