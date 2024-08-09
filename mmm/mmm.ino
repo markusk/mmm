@@ -204,14 +204,23 @@ void loop()
       // PLAY
       klotzDown();
     }
-
     
-    //Serial.println(" out of range ");
   } // measurement failure
-  // else
-  // {
-  //   Serial.println("Sensor error: Phase failures have incorrect data!");
-  // }
+  else
+  {
+    //-----------------------------
+    // distance war too big
+    // let's assume klotz is away!
+    //-----------------------------
+    // Serial.println("Sensor error: Phase failures have incorrect data!");
+
+    // klotz 1 up -> STOP
+    Serial.println("Klotz 1 UP");
+    klotz1 = UP;
+
+    // STOP playing
+    klotzUp();
+   }
   
   // /// @todo needed?
   // delay(100);
