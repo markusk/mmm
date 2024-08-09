@@ -85,11 +85,11 @@ void klotzDown(byte klotz)
 
     // store track state
     track1 = ON;
-  }
 
-  Serial.print("Track ");
-  Serial.print(klotz);
-  Serial.println(" turned ON.");
+    Serial.print("Track ");
+    Serial.print(klotz);
+    Serial.println(" turned ON.");
+  }
 }
 
 
@@ -101,6 +101,13 @@ void klotzUp(byte klotz)
   switch (klotz)
   {
     case 1:
+      if (track1 == ON)
+      {
+        // play note
+        toggleNote(64);
+        // store track state
+        track1 = OFF;
+      }
       break;
     case 2:
       break;
@@ -133,18 +140,10 @@ void klotzUp(byte klotz)
     case 16:
       break;
   }
-  if (track1 == ON)
-  {
-    // play note
-    toggleNote(64);
-    // store track state
-    track1 = OFF;
-    Serial.println("Track 1 turned OFF.");
-  }
 
-  Serial.print("Track ");
-  Serial.print(klotz);
-  Serial.println(" turned OFF.");
+  // Serial.print("Track ");
+  // Serial.print(klotz);
+  // Serial.println(" turned OFF.");
 }
 
 
