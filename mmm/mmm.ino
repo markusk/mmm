@@ -4,8 +4,9 @@
 
 // set the pins to shutdown pin of each sensor
 #define XSHUT1 15
-//#define SHT_LOX2 16
+#define XSHUT1 16
 
+VL53L0X sensor1;
 VL53L0X sensor1;
 
 // holds the measurements
@@ -217,9 +218,12 @@ void blockIsLifted(byte block)
 
 void setup()
 {
-  pinMode(XSHUT1, OUTPUT); // sensor1
+  // set shurdown pins to output
+  pinMode(XSHUT1, OUTPUT);
+  pinMode(XSHUT2, OUTPUT);
   // all sensors in standby
-  digitalWrite(XSHUT1, LOW); // sensor1
+  digitalWrite(XSHUT1, LOW);
+  digitalWrite(XSHUT2, LOW);
 
   delay(500);
   Wire.begin();
@@ -229,15 +233,20 @@ void setup()
   Serial.begin(115200);
   Serial.println("*** Let's go! ***"); 
 
-  // sensor1
+  // sensor 1
   digitalWrite(XSHUT1, HIGH);
   delay(150);
-  Serial.println("00");
   sensor1.init(true);
-  Serial.println("01");
   delay(100);
-  sensor1.setAddress((uint8_t)01);
-  Serial.println("02");
+  sensor1.setAddress( (uint8_t) 01);
+
+  // sensor 2
+  digitalWrite(XSHUT2, HIGH);
+  delay(150);
+  sensor1.init(true);
+  delay(100);
+  sensor1.setAddress( (uint8_t) 02);
+
 
   Serial.println("addresses set");
 
@@ -268,6 +277,9 @@ void setup()
 
 void loop()
 {
+  //----------
+  // sensor 1
+  //----------
   //Serial.print("Reading a measurement... ");
   // sensor1
   measure = sensor1.readRangeContinuousMillimeters();
@@ -275,9 +287,7 @@ void loop()
   //Serial.print(measure);
   //Serial.println(" mm");
 
-  //----------------------
-  // block 1 up or down?
-  //----------------------
+  // block up or down?
   if (measure > 200)
   {
     // block 1 up -> STOP
@@ -293,6 +303,34 @@ void loop()
     block1 = DOWN;
     // PLAY
     blockLies(1);
+  }
+
+  //----------
+  // sensor 2
+  //----------
+  //Serial.print("Reading a measurement... ");
+  // sensor1
+  measure = sensor2.readRangeContinuousMillimeters();
+  //Serial.print("sensor2: ");
+  //Serial.print(measure);
+  //Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 2 up -> STOP
+    //Serial.println("block 2 UP");
+    block2 = UP;
+    // STOP playing
+    blockIsLifted(2);
+  }
+  else
+  {
+    // block 2 down -> PLAY
+    // Serial.println("block 2 DOWN");
+    block2 = DOWN;
+    // PLAY
+    blockLies(2);
   }
 
 }
