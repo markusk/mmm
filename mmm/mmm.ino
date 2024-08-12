@@ -252,6 +252,7 @@ void setup()
 
   // start measurements
   sensor1.startContinuous();
+  sensor2.startContinuous();
 
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
