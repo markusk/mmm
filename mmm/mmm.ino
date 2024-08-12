@@ -1,19 +1,15 @@
-#include "Adafruit_VL53L0X.h"
+#include <Wire.h>
+#include <VL53L0X.h> // by Pololu
 #include "MIDIUSB.h"
 
-// address we will assign if dual sensor is present
-#define LOX1_ADDRESS 0x30
-#define LOX2_ADDRESS 0x31
-
-// set the pins to shutdown
-#define SHT_LOX1 15
+// set the pins to shutdown pin of each sensor
+#define XSHUT1 15
 //#define SHT_LOX2 16
 
-Adafruit_VL53L0X lox1 = Adafruit_VL53L0X();
-Adafruit_VL53L0X lox2 = Adafruit_VL53L0X();
+VL53L0X sensor1;
 
-/// @todo shouln't this line be global!?
-VL53L0X_RangingMeasurementData_t measure;
+// holds the measurements
+int measure = 0;
 
 // general stuff
 uint16_t distance1 = 0;
@@ -221,10 +217,32 @@ void blockIsLifted(byte block)
 
 void setup()
 {
-  // for debugging messageas only
+  pinMode(XSHUT1, OUTPUT); // sensor1
+  // all sensors in standby
+  digitalWrite(XSHUT1, LOW); // sensor1
+
+  delay(500);
+  Wire.begin();
+  
+
+ // for debugging messageas only
   Serial.begin(115200);
-  // power 
   Serial.println("*** Let's go! ***"); 
+
+  // sensor1
+  digitalWrite(XSHUT1, HIGH);
+  delay(150);
+  Serial.println("00");
+  sensor1.init(true);
+  Serial.println("01");
+  delay(100);
+  sensor1.setAddress((uint8_t)01);
+  Serial.println("02");
+
+  Serial.println("addresses set");
+
+  // start measurements
+  sensor1.startContinuous();
 
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
@@ -243,15 +261,6 @@ void setup()
   Serial.println("Adafruit VL53L0X test");
   */
 
-  if (!lox1.begin())
-  {
-    Serial.println(F("Failed to boot VL53L0X"));
-    // digitalWrite(LED_BUILTIN, HIGH);
-    // delay(100);
-    // digitalWrite(LED_BUILTIN, LOW);
-    // delay(100);
-  }
-  
   // LED on
   // digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -260,47 +269,30 @@ void setup()
 void loop()
 {
   //Serial.print("Reading a measurement... ");
-  lox1.rangingTest(&measure, false); // pass in 'true' to get debug data printout!
+  // sensor1
+  measure = sensor1.readRangeContinuousMillimeters();
+  //Serial.print("sensor1: ");
+  //Serial.print(measure);
+  //Serial.println(" mm");
 
-  if (measure.RangeStatus != 4) // phase failures have incorrect data
+  //----------------------
+  // block 1 up or down?
+  //----------------------
+  if (measure > 200)
   {
-    distance1 = measure.RangeMilliMeter;
-    // Serial.print("Distance (mm): ");
-    // Serial.println(distance1);
-
-    //----------------------
-    // block 1 up or down?
-    //----------------------
-    if (distance1 > 200)
-    {
-      // block 1 up -> STOP
-      //Serial.println("block 1 UP");
-      block1 = UP;
-      // STOP playing
-      blockIsLifted(1);
-    }
-    else
-    {
-      // block 1 down -> PLAY
-      // Serial.println("block 1 DOWN");
-      block1 = DOWN;
-      // PLAY
-      blockLies(1);
-    }
-  } // measurement failure (or object too far away!)
-  else
-  {
-    //-----------------------------
-    // distance war too big
-    // let's assume block is away!
-    //-----------------------------
-    // Serial.println("Sensor error: Phase failures have incorrect data!");
-
     // block 1 up -> STOP
-    //Serial.println("block 1 too far away");
+    //Serial.println("block 1 UP");
     block1 = UP;
-
     // STOP playing
     blockIsLifted(1);
-   }
+  }
+  else
+  {
+    // block 1 down -> PLAY
+    // Serial.println("block 1 DOWN");
+    block1 = DOWN;
+    // PLAY
+    blockLies(1);
+  }
+
 }
