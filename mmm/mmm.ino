@@ -4,10 +4,10 @@
 
 // set the pins to shutdown pin of each sensor
 #define XSHUT1 15
-#define XSHUT1 16
+#define XSHUT2 16
 
 VL53L0X sensor1;
-VL53L0X sensor1;
+VL53L0X sensor2;
 
 // holds the measurements
 int measure = 0;
