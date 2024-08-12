@@ -16,18 +16,18 @@ int f;
 
 void setup()
 {
-  pinMode(9, OUTPUT); // sensor
-  pinMode(8, OUTPUT); // sensor
-  pinMode(7, OUTPUT); // sensor
-  pinMode(6, OUTPUT); // sensor
-  pinMode(5, OUTPUT); // sensor2
   pinMode(4, OUTPUT); // sensor
+  pinMode(5, OUTPUT); // sensor2
+  pinMode(6, OUTPUT); // sensor3
+  pinMode(7, OUTPUT); // sensor4
+  pinMode(8, OUTPUT); // sensor5
+  pinMode(9, OUTPUT); // sensor6
   digitalWrite(4, LOW); // sensor
   digitalWrite(5, LOW); // sensor2
-  digitalWrite(6, LOW); // sensor
-  digitalWrite(7, LOW); // sensor
-  digitalWrite(8, LOW); // sensor
-  digitalWrite(9, LOW); // sensor
+  digitalWrite(6, LOW); // sensor3
+  digitalWrite(7, LOW); // sensor4
+  digitalWrite(8, LOW); // sensor5
+  digitalWrite(9, LOW); // sensor6
 
   delay(500);
   Wire.begin();
@@ -40,7 +40,6 @@ void setup()
   delay(150);
   Serial.println("00");
   sensor.init(true);
-
   Serial.println("01");
   delay(100);
   sensor.setAddress((uint8_t)01);
@@ -65,38 +64,36 @@ void setup()
   sensor3.setAddress((uint8_t)03);
   Serial.println("06");
   
+  // sensor4
   digitalWrite(7, HIGH);
   delay(150);
   Serial.println("07");
   sensor4.init(true);
-
-  // sensor4
   Serial.println("08");
   delay(100);
   sensor4.setAddress((uint8_t)04);
   Serial.println("09");
   
+  // sensor5
   digitalWrite(8, HIGH);
   delay(150);
   Serial.println("10");
   sensor5.init(true);
-
-  // sensor5
   Serial.println("11");
   delay(100);
   sensor5.setAddress((uint8_t)05);
   Serial.println("12");
   
+  // sensor6
   digitalWrite(9, HIGH);
   delay(150);
   Serial.println("13");
   sensor6.init(true);
-
-  // sensor6
   Serial.println("14");
   delay(100);
   sensor6.setAddress((uint8_t)06);
   Serial.println("15");
+
 
   Serial.println("addresses set");
 
