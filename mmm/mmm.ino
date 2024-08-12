@@ -231,7 +231,6 @@ void setup()
 
  // for debugging messageas only
   Serial.begin(115200);
-  Serial.println("*** Let's go! ***"); 
 
   // sensor 1
   digitalWrite(XSHUT1, HIGH);
@@ -243,12 +242,12 @@ void setup()
   // sensor 2
   digitalWrite(XSHUT2, HIGH);
   delay(150);
-  sensor1.init(true);
+  sensor2.init(true);
   delay(100);
-  sensor1.setAddress( (uint8_t) 02);
+  sensor2.setAddress( (uint8_t) 02);
 
 
-  Serial.println("addresses set");
+  Serial.println("sensor addresses set");
 
   // start measurements
   sensor1.startContinuous();
@@ -284,9 +283,9 @@ void loop()
   //Serial.print("Reading a measurement... ");
   // sensor1
   measure = sensor1.readRangeContinuousMillimeters();
-  //Serial.print("sensor1: ");
-  //Serial.print(measure);
-  //Serial.println(" mm");
+  // Serial.print("sensor1: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
 
   // block up or down?
   if (measure > 200)
@@ -312,9 +311,9 @@ void loop()
   //Serial.print("Reading a measurement... ");
   // sensor1
   measure = sensor2.readRangeContinuousMillimeters();
-  //Serial.print("sensor2: ");
-  //Serial.print(measure);
-  //Serial.println(" mm");
+  // Serial.print("sensor2: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
 
   // block up or down?
   if (measure > 200)
