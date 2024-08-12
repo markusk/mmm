@@ -86,7 +86,7 @@ void toggleNote(byte note)
   // NOTE on
   //----------
   // Serial.println("Sending note on");
-  noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+  noteOn(0, note, 64);   // Channel 0, middle C, normal velocity
   // Wait for all messages to actually be sent.
   MidiUSB.flush();
   // Avoid  bouncing
@@ -96,7 +96,7 @@ void toggleNote(byte note)
   // NOTE off
   //----------
   // Serial.println("Sending note off");
-  noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+  noteOff(0, note, 64);  // Channel 0, middle C, normal velocity
   // Wait for all messages to actually be sent.
   MidiUSB.flush();
   // Avoid  bouncing
@@ -112,8 +112,8 @@ void blockLies(byte block)
     case 1:
       if (track1 == OFF)
       {
-        // play note 64 (middle C)
-        toggleNote(64);
+        // play note 48 (middle C)
+        toggleNote(48);
         // store track state
         track1 = ON;
         Serial.print("Track ");
@@ -124,8 +124,8 @@ void blockLies(byte block)
     case 2:
       if (track2 == OFF)
       {
-        // play note 65
-        toggleNote(64);
+        // play note 49
+        toggleNote(49);
         // store track state
         track2 = ON;
         Serial.print("Track ");
