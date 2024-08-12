@@ -131,7 +131,7 @@ void loop()
 //  delay(150);
   b=sensor2.readRangeContinuousMillimeters();
 //  digitalWrite(16, LOW);
-  Serial.print("Sensor1: ");
+  Serial.print("Sensor2: ");
   Serial.print(b);
   Serial.println(" mm");
 /*
