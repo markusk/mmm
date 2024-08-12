@@ -49,7 +49,6 @@ void setup()
   delay(100);
   sensor1.setAddress((uint8_t)01);
   Serial.println("02");
-//  digitalWrite(15, LOW);
 
   // sensor2
   digitalWrite(16, HIGH);
@@ -59,7 +58,6 @@ void setup()
   delay(100);
   sensor2.setAddress((uint8_t)02);
   Serial.println("04");
-//  digitalWrite(16, LOW);
 
 /*
   // sensor3
@@ -118,19 +116,13 @@ void loop()
 {
 
   // sensor1
-//  digitalWrite(15, HIGH);
-//  delay(150);
   a=sensor1.readRangeContinuousMillimeters();
-//  digitalWrite(15, LOW);
   Serial.print("sensor1: ");
   Serial.print(a);
   Serial.println(" mm");
 
   // sensor2
-//  digitalWrite(16, HIGH);
-//  delay(150);
   b=sensor2.readRangeContinuousMillimeters();
-//  digitalWrite(16, LOW);
   Serial.print("Sensor2: ");
   Serial.print(b);
   Serial.println(" mm");
@@ -154,5 +146,5 @@ void loop()
   f=sensor6.readRangeContinuousMillimeters();
   Serial.print(f);
 */
-  delay(100);
+  //delay(100);
 }
