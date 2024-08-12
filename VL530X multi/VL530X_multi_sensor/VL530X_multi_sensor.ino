@@ -1,7 +1,7 @@
 #include <Wire.h>
 #include <VL53L0X.h> // by Pololu
 
-VL53L0X sensor;
+VL53L0X sensor1;
 VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
@@ -16,7 +16,7 @@ int f=0;
 
 void setup()
 {
-  pinMode(15, OUTPUT); // sensor
+  pinMode(15, OUTPUT); // sensor1
   pinMode(16, OUTPUT); // sensor2
   /*
   pinMode(6, OUTPUT); // sensor3
@@ -25,7 +25,7 @@ void setup()
   pinMode(9, OUTPUT); // sensor6
   */
   // all sensors in standby
-  digitalWrite(15, LOW); // sensor
+  digitalWrite(15, LOW); // sensor1
   digitalWrite(16, LOW); // sensor2
   /*
   digitalWrite(6, LOW); // sensor3
@@ -40,14 +40,14 @@ void setup()
 
   Serial.begin (9600);
 
-  // sensor
+  // sensor1
   digitalWrite(15, HIGH);
   delay(150);
   Serial.println("00");
-  sensor.init(true);
+  sensor1.init(true);
   Serial.println("01");
   delay(100);
-  sensor.setAddress((uint8_t)01);
+  sensor1.setAddress((uint8_t)01);
   Serial.println("02");
 //  digitalWrite(15, LOW);
 
@@ -104,7 +104,7 @@ void setup()
 
   Serial.println("addresses set");
 
-  sensor.startContinuous();
+  sensor1.startContinuous();
   sensor2.startContinuous();
   /*
   sensor3.startContinuous();
@@ -116,12 +116,13 @@ void setup()
 
 void loop()
 {
-  // sensor
+
+  // sensor1
 //  digitalWrite(15, HIGH);
 //  delay(150);
-  a=sensor.readRangeContinuousMillimeters();
+  a=sensor1.readRangeContinuousMillimeters();
 //  digitalWrite(15, LOW);
-  Serial.print("Sensor0: ");
+  Serial.print("sensor1: ");
   Serial.print(a);
   Serial.println(" mm");
 
