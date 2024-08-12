@@ -7,27 +7,31 @@ VL53L0X sensor3;
 VL53L0X sensor4;
 VL53L0X sensor5;
 VL53L0X sensor6;
-int a;
-int b;
-int c;
-int d;
-int e;
-int f;
+int a=0;
+int b=0;
+int c=0;
+int d=0;
+int e=0;
+int f=0;
 
 void setup()
 {
-  pinMode(4, OUTPUT); // sensor
+  pinMode(15, OUTPUT); // sensor
+  /*
   pinMode(5, OUTPUT); // sensor2
   pinMode(6, OUTPUT); // sensor3
   pinMode(7, OUTPUT); // sensor4
   pinMode(8, OUTPUT); // sensor5
   pinMode(9, OUTPUT); // sensor6
-  digitalWrite(4, LOW); // sensor
+  */
+  digitalWrite(15, LOW); // sensor
+  /*
   digitalWrite(5, LOW); // sensor2
   digitalWrite(6, LOW); // sensor3
   digitalWrite(7, LOW); // sensor4
   digitalWrite(8, LOW); // sensor5
   digitalWrite(9, LOW); // sensor6
+  */
 
   delay(500);
   Wire.begin();
@@ -36,7 +40,7 @@ void setup()
   Serial.begin (9600);
 
   // sensor
-  digitalWrite(4, HIGH);
+  digitalWrite(15, HIGH);
   delay(150);
   Serial.println("00");
   sensor.init(true);
@@ -44,7 +48,7 @@ void setup()
   delay(100);
   sensor.setAddress((uint8_t)01);
   Serial.println("02");
-
+/*
   // sensor2
   digitalWrite(5, HIGH);
     delay(150);
@@ -93,17 +97,18 @@ void setup()
   delay(100);
   sensor6.setAddress((uint8_t)06);
   Serial.println("15");
-
+*/
 
   Serial.println("addresses set");
 
-sensor.startContinuous();
-sensor2.startContinuous();
-sensor3.startContinuous();
-sensor4.startContinuous();
-sensor5.startContinuous();
-sensor6.startContinuous();
-
+  sensor.startContinuous();
+  /*
+  sensor2.startContinuous();
+  sensor3.startContinuous();
+  sensor4.startContinuous();
+  sensor5.startContinuous();
+  sensor6.startContinuous();
+  */
 }
 
 void loop()
@@ -112,7 +117,7 @@ void loop()
   a=sensor.readRangeContinuousMillimeters();
   Serial.print(a);
   Serial.print("  ");
-
+/*
   // sensor2
   b=sensor2.readRangeContinuousMillimeters();
   Serial.print(b);
@@ -135,8 +140,8 @@ void loop()
 
   // sensor6
   f=sensor6.readRangeContinuousMillimeters();
-  Serial.println(f);
-
-  //delay(100);
+  Serial.print(f);
+*/
+  Serial.println();
+  delay(100);
 }
-
