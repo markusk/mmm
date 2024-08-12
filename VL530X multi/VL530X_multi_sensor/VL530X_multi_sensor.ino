@@ -1,5 +1,5 @@
 #include <Wire.h>
-#include <VL53L0X.h>
+#include <VL53L0X.h> // by Pololu
 
 VL53L0X sensor;
 VL53L0X sensor2;
@@ -16,18 +16,18 @@ int f;
 
 void setup()
 {
-  pinMode(9, OUTPUT);
-  pinMode(8, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(4, OUTPUT);
-  digitalWrite(4, LOW);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
-  digitalWrite(7, LOW);
-  digitalWrite(8, LOW);
-  digitalWrite(9, LOW);
+  pinMode(9, OUTPUT); // sensor
+  pinMode(8, OUTPUT); // sensor
+  pinMode(7, OUTPUT); // sensor
+  pinMode(6, OUTPUT); // sensor
+  pinMode(5, OUTPUT); // sensor2
+  pinMode(4, OUTPUT); // sensor
+  digitalWrite(4, LOW); // sensor
+  digitalWrite(5, LOW); // sensor2
+  digitalWrite(6, LOW); // sensor
+  digitalWrite(7, LOW); // sensor
+  digitalWrite(8, LOW); // sensor
+  digitalWrite(9, LOW); // sensor
 
   delay(500);
   Wire.begin();
@@ -35,6 +35,7 @@ void setup()
 
   Serial.begin (9600);
 
+  // sensor
   digitalWrite(4, HIGH);
   delay(150);
   Serial.println("00");
@@ -45,6 +46,7 @@ void setup()
   sensor.setAddress((uint8_t)01);
   Serial.println("02");
 
+  // sensor2
   digitalWrite(5, HIGH);
     delay(150);
   sensor2.init(true);
@@ -53,6 +55,8 @@ void setup()
   sensor2.setAddress((uint8_t)02);
   Serial.println("04");
   
+
+  // sensor3
   digitalWrite(6, HIGH);
     delay(150);
   sensor3.init(true);
@@ -66,6 +70,7 @@ void setup()
   Serial.println("07");
   sensor4.init(true);
 
+  // sensor4
   Serial.println("08");
   delay(100);
   sensor4.setAddress((uint8_t)04);
@@ -76,6 +81,7 @@ void setup()
   Serial.println("10");
   sensor5.init(true);
 
+  // sensor5
   Serial.println("11");
   delay(100);
   sensor5.setAddress((uint8_t)05);
@@ -86,6 +92,7 @@ void setup()
   Serial.println("13");
   sensor6.init(true);
 
+  // sensor6
   Serial.println("14");
   delay(100);
   sensor6.setAddress((uint8_t)06);
@@ -104,22 +111,32 @@ sensor6.startContinuous();
 
 void loop()
 {
-  
+  // sensor
   a=sensor.readRangeContinuousMillimeters();
   Serial.print(a);
   Serial.print("  ");
+
+  // sensor2
   b=sensor2.readRangeContinuousMillimeters();
   Serial.print(b);
   Serial.print("  ");
+
+  // sensor3
   c=sensor3.readRangeContinuousMillimeters();
   Serial.print(c);
   Serial.print("  ");
+
+  // sensor4
   d=sensor4.readRangeContinuousMillimeters();
   Serial.print(d);
   Serial.print("  ");
+
+  // sensor5
   e=sensor5.readRangeContinuousMillimeters();
   Serial.print(e);
   Serial.print("  ");
+
+  // sensor6
   f=sensor6.readRangeContinuousMillimeters();
   Serial.println(f);
 
