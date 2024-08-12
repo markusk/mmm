@@ -15,14 +15,12 @@
 
 #include <Wire.h>
 
-/*
-VL53L0X sensor7;
+VL53L0X sensor1;
 VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
 VL53L0X sensor5;
-*/
-VL53L0X sensor1;
+VL53L0X sensor6;
 
 
 int a;
@@ -37,21 +35,18 @@ void setup()
 {
   // Sensor 1, Pin 15 (SHUTDOWN)
   pinMode(15, OUTPUT);
-
-/*
-  pinMode(8, OUTPUT);
-  pinMode(7, OUTPUT);
-  pinMode(6, OUTPUT);
-  pinMode(5, OUTPUT);
-  pinMode(4, OUTPUT);
+  pinMode(16, OUTPUT);
+  pinMode(17, OUTPUT);
+  pinMode(18, OUTPUT);
+  pinMode(19, OUTPUT);
+  pinMode(20, OUTPUT);
  
-  digitalWrite(4, LOW);
-  digitalWrite(5, LOW);
-  digitalWrite(6, LOW);
-  digitalWrite(7, LOW);
-  digitalWrite(8, LOW);
-*/
   digitalWrite(15, LOW);
+  digitalWrite(16, LOW);
+  digitalWrite(17, LOW);
+  digitalWrite(18, LOW);
+  digitalWrite(19, LOW);
+  digitalWrite(20, LOW);
 
   delay(500);
 
@@ -60,8 +55,8 @@ void setup()
 
   // only for debugging purposes
   Serial.begin (9600);
-/*
-  digitalWrite(4, HIGH);
+
+  digitalWrite(15, HIGH);
   delay(150);
   Serial.println("00");
   sensor7.init(true);
@@ -71,7 +66,8 @@ void setup()
   sensor7.setAddress((uint8_t)01);
   Serial.println("02");
 
-  digitalWrite(5, HIGH);
+
+  digitalWrite(16, HIGH);
     delay(150);
   sensor2.init(true);
   Serial.println("03");
@@ -79,7 +75,8 @@ void setup()
   sensor2.setAddress((uint8_t)02);
   Serial.println("04");
   
-  digitalWrite(6, HIGH);
+
+  digitalWrite(17, HIGH);
     delay(150);
   sensor3.init(true);
   Serial.println("05");
@@ -87,7 +84,7 @@ void setup()
   sensor3.setAddress((uint8_t)03);
   Serial.println("06");
   
-  digitalWrite(7, HIGH);
+  digitalWrite(18, HIGH);
   delay(150);
   Serial.println("07");
   sensor4.init(true);
@@ -97,7 +94,8 @@ void setup()
   sensor4.setAddress((uint8_t)04);
   Serial.println("09");
   
-  digitalWrite(8, HIGH);
+
+  digitalWrite(19, HIGH);
   delay(150);
   Serial.println("10");
   sensor5.init(true);
@@ -107,50 +105,53 @@ void setup()
   sensor5.setAddress((uint8_t)05);
   Serial.println("12");
 
-  digitalWrite(15, HIGH);
+
+  digitalWrite(20, HIGH);
   delay(150);
   Serial.println("13");
   sensor1.init(true);
-*/
+
   Serial.println("14");
   delay(100);
   sensor1.setAddress((uint8_t)06);
   Serial.println("15");
 
   Serial.println("addresses set");
-/*
-  sensor7.startContinuous();
+
+  sensor1.startContinuous();
   sensor2.startContinuous();
   sensor3.startContinuous();
   sensor4.startContinuous();
   sensor5.startContinuous();
-*/
-  sensor1.startContinuous();
+  sensor6.startContinuous();
 
 }
 
 
 void loop()
 {
-/*  
-  a=sensor7.readRangeContinuousMillimeters();
+  a=sensor1.readRangeContinuousMillimeters();
   Serial.print(a);
   Serial.print("  ");
+
   b=sensor2.readRangeContinuousMillimeters();
   Serial.print(b);
   Serial.print("  ");
+
   c=sensor3.readRangeContinuousMillimeters();
   Serial.print(c);
   Serial.print("  ");
+
   d=sensor4.readRangeContinuousMillimeters();
   Serial.print(d);
   Serial.print("  ");
+
   e=sensor5.readRangeContinuousMillimeters();
   Serial.print(e);
   Serial.print("  ");
-*/
-  f=sensor1.readRangeContinuousMillimeters();
+
+  f=sensor6.readRangeContinuousMillimeters();
   Serial.println(f);
 
-  //delay(100);
+  delay(100);
 }
