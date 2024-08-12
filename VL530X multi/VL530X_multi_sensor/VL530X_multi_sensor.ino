@@ -17,16 +17,17 @@ int f=0;
 void setup()
 {
   pinMode(15, OUTPUT); // sensor
+  pinMode(16, OUTPUT); // sensor2
   /*
-  pinMode(5, OUTPUT); // sensor2
   pinMode(6, OUTPUT); // sensor3
   pinMode(7, OUTPUT); // sensor4
   pinMode(8, OUTPUT); // sensor5
   pinMode(9, OUTPUT); // sensor6
   */
+  // all sensors in standby
   digitalWrite(15, LOW); // sensor
+  digitalWrite(16, LOW); // sensor2
   /*
-  digitalWrite(5, LOW); // sensor2
   digitalWrite(6, LOW); // sensor3
   digitalWrite(7, LOW); // sensor4
   digitalWrite(8, LOW); // sensor5
@@ -48,17 +49,19 @@ void setup()
   delay(100);
   sensor.setAddress((uint8_t)01);
   Serial.println("02");
-/*
+//  digitalWrite(15, LOW);
+
   // sensor2
-  digitalWrite(5, HIGH);
+  digitalWrite(16, HIGH);
     delay(150);
   sensor2.init(true);
   Serial.println("03");
   delay(100);
   sensor2.setAddress((uint8_t)02);
   Serial.println("04");
-  
+//  digitalWrite(16, LOW);
 
+/*
   // sensor3
   digitalWrite(6, HIGH);
     delay(150);
@@ -102,8 +105,8 @@ void setup()
   Serial.println("addresses set");
 
   sensor.startContinuous();
-  /*
   sensor2.startContinuous();
+  /*
   sensor3.startContinuous();
   sensor4.startContinuous();
   sensor5.startContinuous();
@@ -114,15 +117,23 @@ void setup()
 void loop()
 {
   // sensor
+//  digitalWrite(15, HIGH);
+//  delay(150);
   a=sensor.readRangeContinuousMillimeters();
+//  digitalWrite(15, LOW);
+  Serial.print("Sensor0: ");
   Serial.print(a);
-  Serial.print("  ");
-/*
-  // sensor2
-  b=sensor2.readRangeContinuousMillimeters();
-  Serial.print(b);
-  Serial.print("  ");
+  Serial.println(" mm");
 
+  // sensor2
+//  digitalWrite(16, HIGH);
+//  delay(150);
+  b=sensor2.readRangeContinuousMillimeters();
+//  digitalWrite(16, LOW);
+  Serial.print("Sensor1: ");
+  Serial.print(b);
+  Serial.println(" mm");
+/*
   // sensor3
   c=sensor3.readRangeContinuousMillimeters();
   Serial.print(c);
@@ -142,6 +153,5 @@ void loop()
   f=sensor6.readRangeContinuousMillimeters();
   Serial.print(f);
 */
-  Serial.println();
   delay(100);
 }
