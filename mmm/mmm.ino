@@ -112,25 +112,69 @@ void blockLies(byte block)
     case 1:
       if (track1 == OFF)
       {
+        /*
         // play note 48 (middle C)
         toggleNote(48);
         // store track state
         track1 = ON;
+        */
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned ON.");
+
+        //----------
+        // NOTE on
+        //----------
+        // Serial.println("Sending note on");
+        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        //----------
+        // NOTE off
+        //----------
+        // Serial.println("Sending note off");
+        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        // store track state
+        track1 = ON;
       }
       break;
     case 2:
       if (track2 == OFF)
       {
+        /*
         // play note 49
         toggleNote(49);
+        */
         // store track state
         track2 = ON;
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned ON.");
+
+        //----------
+        // NOTE on
+        //----------
+        // Serial.println("Sending note on");
+        noteOn(0, 49, 64);   // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        //----------
+        // NOTE off
+        //----------
+        // Serial.println("Sending note off");
+        noteOff(0, 49, 64);  // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
       }
       break;
     case 3:
@@ -165,6 +209,7 @@ void blockIsLifted(byte block)
     case 1:
       if (track1 == ON)
       {
+        /*
         // play note 64 (middle C)
         toggleNote(64);
         // store track state
@@ -173,16 +218,60 @@ void blockIsLifted(byte block)
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned OFF.");
+        */
+        //----------
+        // NOTE on
+        //----------
+        // Serial.println("Sending note on");
+        noteOn(0, 48, 64);   // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        //----------
+        // NOTE off
+        //----------
+        // Serial.println("Sending note off");
+        noteOff(0, 48, 64);  // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        // store track state
+        track1 = OFF;
       }
       break;
     case 2:
       if (track2 == ON)
       {
+        /*
         // play note 65
         toggleNote(65);
         // store track state
         track2 = OFF;
-        
+        */
+
+        //----------
+        // NOTE on
+        //----------
+        // Serial.println("Sending note on");
+        noteOn(0, 49, 64);   // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        //----------
+        // NOTE off
+        //----------
+        // Serial.println("Sending note off");
+        noteOff(0, 49, 64);  // Channel 0, middle C, normal velocity
+        // Wait for all messages to actually be sent.
+        MidiUSB.flush();
+        // Avoid  bouncing
+        delay(100);
+        // store track state
+        track2 = OFF;
+
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned OFF.");
