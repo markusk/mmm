@@ -6,6 +6,9 @@
 #define XSHUT1 15
 #define XSHUT2 16
 
+// distance in mm when a block is recognised as "UP"
+int blockThreshold = 20;
+
 VL53L0X sensor1;
 VL53L0X sensor2;
 
@@ -18,9 +21,6 @@ bool ON = true;
 bool OFF = false;
 bool UP = true;
 bool DOWN = false;
-
-// distance in mm when a block is recognised as "UP"
-int blockThreshold = 20;
 
 // all tracks
 bool track1 = ON;
@@ -377,7 +377,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 1 up -> STOP
     //Serial.println("block 1 UP");
