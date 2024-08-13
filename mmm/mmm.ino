@@ -130,7 +130,7 @@ void blockLies(byte block)
       if (track1 == OFF)
       {
         // play note (usually 48 (middle C), see definitions on the very top)
-        toggleNote(baseNote);
+        toggleNote(baseNote + block);
         // store track state
         track1 = ON;
         Serial.println(String("Track " + String(block) + " turned ON."));
@@ -140,17 +140,41 @@ void blockLies(byte block)
       if (track2 == OFF)
       {
         // play next note
-        toggleNote(baseNote+1);
+        toggleNote(baseNote + block);
         // store track state
         track2 = ON;
         Serial.println(String("Track " + String(block) + " turned ON."));
       }
       break;
     case 3:
+      if (track3 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track3 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 4:
+      if (track4 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track4 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 5:
+      if (track5 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track5 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 6:
       break;
@@ -179,7 +203,7 @@ void blockIsLifted(byte block)
       if (track1 == ON)
       {
         // play note (usually 48 (middle C), see definitions on the very top)
-        toggleNote(baseNote);
+        toggleNote(baseNote + block);
         // store track state
         track1 = OFF;
         Serial.println(String("Track " + String(block) + " turned OFF."));
@@ -189,17 +213,41 @@ void blockIsLifted(byte block)
       if (track2 == ON)
       {
         // play next note
-        toggleNote(baseNote+1);
+        toggleNote(baseNote + block);
         // store track state
         track2 = OFF;
         Serial.println(String("Track " + String(block) + " turned OFF."));
       }
       break;
     case 3:
+      if (track3 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track3 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 4:
+      if (track4 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track4 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 5:
+      if (track5 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track5 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 6:
       break;
@@ -221,6 +269,8 @@ void blockIsLifted(byte block)
 
 void setup()
 {
+  baseNote--; /// @ todo: remove line and update MIDI mapping! < < < < < < < < < < <
+
   // set shurdown pins to output
   pinMode(XSHUT1, OUTPUT);
   pinMode(XSHUT2, OUTPUT);
