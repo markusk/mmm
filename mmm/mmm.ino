@@ -310,9 +310,8 @@ void loop()
   // sensor 1
   //----------
   //Serial.print("Reading a measurement... ");
-  // sensor1
   measure = sensor1.readRangeContinuousMillimeters();
-  // Serial.print("sensor1: ");
+  // Serial.print("sensor 1: ");
   // Serial.print(measure);
   // Serial.println(" mm");
 
@@ -338,9 +337,8 @@ void loop()
   // sensor 2
   //----------
   //Serial.print("Reading a measurement... ");
-  // sensor1
   measure = sensor2.readRangeContinuousMillimeters();
-  // Serial.print("sensor2: ");
+  // Serial.print("sensor 2: ");
   // Serial.print(measure);
   // Serial.println(" mm");
 
@@ -360,6 +358,87 @@ void loop()
     block2 = DOWN;
     // PLAY
     blockLies(2);
+  }
+
+  //----------
+  // sensor 3
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor3.readRangeContinuousMillimeters();
+  // Serial.print("sensor 3: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 3 up -> STOP
+    //Serial.println("block 3 UP");
+    block3 = UP;
+    // STOP playing
+    blockIsLifted(3);
+  }
+  else
+  {
+    // block 3 down -> PLAY
+    // Serial.println("block 3 DOWN");
+    block3 = DOWN;
+    // PLAY
+    blockLies(3);
+  }
+
+  //----------
+  // sensor 4
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor4.readRangeContinuousMillimeters();
+  // Serial.print("sensor 4: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 4 up -> STOP
+    //Serial.println("block 4 UP");
+    block4 = UP;
+    // STOP playing
+    blockIsLifted(4);
+  }
+  else
+  {
+    // block 4 down -> PLAY
+    // Serial.println("block 4 DOWN");
+    block4 = DOWN;
+    // PLAY
+    blockLies(4);
+  }
+
+  //----------
+  // sensor 5
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor5.readRangeContinuousMillimeters();
+  // Serial.print("sensor 5: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 5 up -> STOP
+    //Serial.println("block 5 UP");
+    block5 = UP;
+    // STOP playing
+    blockIsLifted(5);
+  }
+  else
+  {
+    // block 5 down -> PLAY
+    // Serial.println("block 5 DOWN");
+    block5 = DOWN;
+    // PLAY
+    blockLies(5);
   }
 
 }
