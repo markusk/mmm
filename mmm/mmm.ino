@@ -5,6 +5,9 @@
 // set the pins to shutdown pin of each sensor
 #define XSHUT1 15
 #define XSHUT2 16
+#define XSHUT3 17
+#define XSHUT4 18
+#define XSHUT5 19
 
 // distance in mm when a block is recognised as "UP"
 int blockThreshold = 20;
@@ -14,6 +17,9 @@ byte baseNote = 48;
 
 VL53L0X sensor1;
 VL53L0X sensor2;
+VL53L0X sensor3;
+VL53L0X sensor4;
+VL53L0X sensor5;
 
 // holds the measurements
 int measure = 0;
@@ -230,9 +236,15 @@ void setup()
   // set shurdown pins to output
   pinMode(XSHUT1, OUTPUT);
   pinMode(XSHUT2, OUTPUT);
+  pinMode(XSHUT3, OUTPUT);
+  pinMode(XSHUT4, OUTPUT);
+  pinMode(XSHUT5, OUTPUT);
   // all sensors in standby
   digitalWrite(XSHUT1, LOW);
   digitalWrite(XSHUT2, LOW);
+  digitalWrite(XSHUT3, LOW);
+  digitalWrite(XSHUT4, LOW);
+  digitalWrite(XSHUT5, LOW);
 
   delay(500);
   Wire.begin();
@@ -241,19 +253,36 @@ void setup()
  // for debugging messageas only
   Serial.begin(115200);
 
-  // sensor 1
+  // init sensor 1
   digitalWrite(XSHUT1, HIGH);
   delay(150);
   sensor1.init(true);
   delay(100);
   sensor1.setAddress( (uint8_t) 01);
-
-  // sensor 2
+  // init sensor 2
   digitalWrite(XSHUT2, HIGH);
   delay(150);
   sensor2.init(true);
   delay(100);
   sensor2.setAddress( (uint8_t) 02);
+  // init sensor 3
+  digitalWrite(XSHUT3, HIGH);
+  delay(150);
+  sensor3.init(true);
+  delay(100);
+  sensor3.setAddress( (uint8_t) 03);
+  // init sensor 4
+  digitalWrite(XSHUT4, HIGH);
+  delay(150);
+  sensor4.init(true);
+  delay(100);
+  sensor4.setAddress( (uint8_t) 04);
+  // init sensor 5
+  digitalWrite(XSHUT5, HIGH);
+  delay(150);
+  sensor5.init(true);
+  delay(100);
+  sensor5.setAddress( (uint8_t) 05);
 
 
   Serial.println("sensor addresses set");
@@ -261,6 +290,9 @@ void setup()
   // start measurements
   sensor1.startContinuous();
   sensor2.startContinuous();
+  sensor3.startContinuous();
+  sensor4.startContinuous();
+  sensor5.startContinuous();
 
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
