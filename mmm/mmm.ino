@@ -3,11 +3,22 @@
 #include "MIDIUSB.h"
 
 // set the pins to shutdown pin of each sensor
-#define XSHUT1 15
-#define XSHUT2 16
-#define XSHUT3 17
-#define XSHUT4 18
-#define XSHUT5 19
+#define XSHUT1  15
+#define XSHUT2  16
+#define XSHUT3  17
+#define XSHUT4  18
+#define XSHUT5  19
+#define XSHUT6  20
+#define XSHUT7  21
+#define XSHUT8   0
+#define XSHUT9   1
+#define XSHUT10  2
+#define XSHUT11  3
+#define XSHUT12  4
+#define XSHUT13  5
+#define XSHUT14  6
+#define XSHUT15  7
+#define XSHUT16  8
 
 // distance in mm when a block is recognised as "UP"
 int blockThreshold = 20;
@@ -46,6 +57,10 @@ bool track9 = ON;
 bool track10 = ON;
 bool track11 = ON;
 bool track12 = ON;
+bool track13 = ON;
+bool track14 = ON;
+bool track15 = ON;
+bool track16 = ON;
 // all wooden blocks
 bool block1 = DOWN;
 bool block2 = DOWN;
@@ -59,6 +74,10 @@ bool block9 = DOWN;
 bool block10 = DOWN;
 bool block11 = DOWN;
 bool block12 = DOWN;
+bool block13 = DOWN;
+bool block14 = DOWN;
+bool block15 = DOWN;
+bool block16 = DOWN;
 
 
 // First MIDI parameter is the event type (0x09 = note on, 0x08 = note off)
@@ -190,6 +209,14 @@ void blockLies(byte block)
       break;
     case 12:
       break;
+    case 13:
+      break;
+    case 14:
+      break;
+    case 15:
+      break;
+    case 16:
+      break;
   }
 }
 
@@ -263,6 +290,14 @@ void blockIsLifted(byte block)
       break;
     case 12:
       break;
+    case 13:
+      break;
+    case 14:
+      break;
+    case 15:
+      break;
+    case 16:
+      break;
   }
 }
 
@@ -277,12 +312,34 @@ void setup()
   pinMode(XSHUT3, OUTPUT);
   pinMode(XSHUT4, OUTPUT);
   pinMode(XSHUT5, OUTPUT);
+  pinMode(XSHUT6, OUTPUT);
+  pinMode(XSHUT7, OUTPUT);
+  pinMode(XSHUT8, OUTPUT);
+  pinMode(XSHUT9, OUTPUT);
+  pinMode(XSHUT10, OUTPUT);
+  pinMode(XSHUT11, OUTPUT);
+  pinMode(XSHUT12, OUTPUT);
+  pinMode(XSHUT13, OUTPUT);
+  pinMode(XSHUT14, OUTPUT);
+  pinMode(XSHUT15, OUTPUT);
+  pinMode(XSHUT16, OUTPUT);
   // all sensors in standby
   digitalWrite(XSHUT1, LOW);
   digitalWrite(XSHUT2, LOW);
   digitalWrite(XSHUT3, LOW);
   digitalWrite(XSHUT4, LOW);
   digitalWrite(XSHUT5, LOW);
+  digitalWrite(XSHUT6, LOW);
+  digitalWrite(XSHUT7, LOW);
+  digitalWrite(XSHUT8, LOW);
+  digitalWrite(XSHUT9, LOW);
+  digitalWrite(XSHUT10, LOW);
+  digitalWrite(XSHUT11, LOW);
+  digitalWrite(XSHUT12, LOW);
+  digitalWrite(XSHUT13, LOW);
+  digitalWrite(XSHUT14, LOW);
+  digitalWrite(XSHUT15, LOW);
+  digitalWrite(XSHUT16, LOW);
 
   delay(500);
   Wire.begin();
