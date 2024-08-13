@@ -9,11 +9,17 @@
 // distance in mm when a block is recognised as "UP"
 int blockThreshold = 20;
 
+// this is the base note for sensor1, all following sensor notes will be increased by 1
+byte baseNote = 48;
+
 VL53L0X sensor1;
 VL53L0X sensor2;
 
 // holds the measurements
 int measure = 0;
+
+// The time in ms between note on and off
+unsigned char noteBounceDelay = 50;
 
 // general stuff
 bool ON = true;
@@ -89,7 +95,7 @@ void toggleNote(byte note)
   // Wait for all messages to actually be sent.
   MidiUSB.flush();
   // Avoid  bouncing
-  delay(100);
+  delay(noteBounceDelay);
 
   //----------
   // NOTE off
@@ -99,7 +105,7 @@ void toggleNote(byte note)
   // Wait for all messages to actually be sent.
   MidiUSB.flush();
   // Avoid  bouncing
-  delay(100);
+  delay(noteBounceDelay);
 }
 
 
@@ -111,8 +117,8 @@ void blockLies(byte block)
     case 1:
       if (track1 == OFF)
       {
-        // play note 48 (middle C)
-        toggleNote(48);
+        // play note (usually 48 (middle C), see definitions on the very top)
+        toggleNote(baseNote);
         // store track state
         track1 = ON;
         
@@ -124,8 +130,8 @@ void blockLies(byte block)
     case 2:
       if (track2 == OFF)
       {
-        // play note 49
-        toggleNote(49);
+        // play next note
+        toggleNote(baseNote+1);
         // store track state
         track2 = ON;
         
@@ -166,8 +172,8 @@ void blockIsLifted(byte block)
     case 1:
       if (track1 == ON)
       {
-        // play note 48 (middle C)
-        toggleNote(48);
+        // play note (usually 48 (middle C), see definitions on the very top)
+        toggleNote(baseNote);
         // store track state
         track1 = OFF;
         
@@ -179,8 +185,8 @@ void blockIsLifted(byte block)
     case 2:
       if (track2 == ON)
       {
-        // play note 49
-        toggleNote(49);
+        // play next note
+        toggleNote(baseNote+1);
         // store track state
         track2 = OFF;
 
@@ -253,10 +259,10 @@ void setup()
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
 
-  //pinMode(LED_BUILTIN, OUTPUT);
-
-  // LED on
-  // digitalWrite(LED_BUILTIN, HIGH);
+  // let the LED show some stuff
+  pinMode(LED_BUILTIN, OUTPUT);
+  // LED on - We are ready!
+  digitalWrite(LED_BUILTIN, HIGH);
 }
 
 
