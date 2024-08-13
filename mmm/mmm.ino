@@ -211,7 +211,7 @@ void blockIsLifted(byte block)
       {
         /*
         // play note 64 (middle C)
-        toggleNote(64);
+        toggleNote(48);
         // store track state
         track1 = OFF;
         
