@@ -133,10 +133,7 @@ void blockLies(byte block)
         toggleNote(baseNote);
         // store track state
         track1 = ON;
-        
-        Serial.print("Track ");
-        Serial.print(block);
-        Serial.println(" turned ON.");
+        Serial.println(String("Track " + String(block) + " turned ON."));
       }
       break;
     case 2:
@@ -146,10 +143,7 @@ void blockLies(byte block)
         toggleNote(baseNote+1);
         // store track state
         track2 = ON;
-        
-        Serial.print("Track ");
-        Serial.print(block);
-        Serial.println(" turned ON.");
+        Serial.println(String("Track " + String(block) + " turned ON."));
       }
       break;
     case 3:
@@ -188,10 +182,7 @@ void blockIsLifted(byte block)
         toggleNote(baseNote);
         // store track state
         track1 = OFF;
-        
-        Serial.print("Track ");
-        Serial.print(block);
-        Serial.println(" turned OFF.");
+        Serial.println(String("Track " + String(block) + " turned OFF."));
       }
       break;
     case 2:
@@ -201,10 +192,7 @@ void blockIsLifted(byte block)
         toggleNote(baseNote+1);
         // store track state
         track2 = OFF;
-
-        Serial.print("Track ");
-        Serial.print(block);
-        Serial.println(" turned OFF.");
+        Serial.println(String("Track " + String(block) + " turned OFF."));
       }
       break;
     case 3:
