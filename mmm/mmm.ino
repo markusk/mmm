@@ -16,7 +16,6 @@ VL53L0X sensor2;
 int measure = 0;
 
 // general stuff
-uint16_t distance1 = 0;
 bool ON = true;
 bool OFF = false;
 bool UP = true;
@@ -50,7 +49,7 @@ bool block11 = DOWN;
 bool block12 = DOWN;
 
 
-// First parameter is the event type (0x09 = note on, 0x08 = note off).
+// First MIDI parameter is the event type (0x09 = note on, 0x08 = note off)
 // Second parameter is note-on/note-off, combined with the channel.
 // Channel can be anything between 0-15. Typically reported to the user as 1-16.
 // Third parameter is the note number (48 = middle C).
@@ -69,7 +68,7 @@ void noteOff(byte channel, byte pitch, byte velocity)
 }
 
 
-// First parameter is the event type, combined with the channel.
+// First MIDI parameter is the event type, combined with the MIDI channel.
 // Secomd parameter is the control number number (0-119).
 // Third parameter is the control value (0-127).
 void controlChange(byte channel, byte control, byte value)
@@ -112,16 +111,15 @@ void blockLies(byte block)
     case 1:
       if (track1 == OFF)
       {
-        /*
         // play note 48 (middle C)
         toggleNote(48);
         // store track state
         track1 = ON;
-        */
+        
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned ON.");
-
+/*
         //----------
         // NOTE on
         //----------
@@ -142,6 +140,7 @@ void blockLies(byte block)
         delay(100);
         // store track state
         track1 = ON;
+*/
       }
       break;
     case 2:
@@ -209,8 +208,7 @@ void blockIsLifted(byte block)
     case 1:
       if (track1 == ON)
       {
-        /*
-        // play note 64 (middle C)
+        // play note 48 (middle C)
         toggleNote(48);
         // store track state
         track1 = OFF;
@@ -218,7 +216,7 @@ void blockIsLifted(byte block)
         Serial.print("Track ");
         Serial.print(block);
         Serial.println(" turned OFF.");
-        */
+/*
         //----------
         // NOTE on
         //----------
@@ -239,6 +237,7 @@ void blockIsLifted(byte block)
         delay(100);
         // store track state
         track1 = OFF;
+*/
       }
       break;
     case 2:
@@ -346,18 +345,6 @@ void setup()
   blockThreshold *= 10;
 
   //pinMode(LED_BUILTIN, OUTPUT);
-
- /*
-  // wait until serial port opens for native USB devices
-  while (! Serial) {
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
-  }
-  
-  Serial.println("Adafruit VL53L0X test");
-  */
 
   // LED on
   // digitalWrite(LED_BUILTIN, HIGH);
