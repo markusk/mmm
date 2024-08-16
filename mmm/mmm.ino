@@ -379,31 +379,31 @@ void setup()
   delay(150);
   sensor1.init(true);
   delay(100);
-  sensor1.setAddress( (uint8_t) 01);
+  sensor1.setAddress( (uint8_t) 1);
   // init sensor 2
   digitalWrite(XSHUT2, HIGH);
   delay(150);
   sensor2.init(true);
   delay(100);
-  sensor2.setAddress( (uint8_t) 02);
+  sensor2.setAddress( (uint8_t) 2);
   // init sensor 3
   digitalWrite(XSHUT3, HIGH);
   delay(150);
   sensor3.init(true);
   delay(100);
-  sensor3.setAddress( (uint8_t) 03);
+  sensor3.setAddress( (uint8_t) 3);
   // init sensor 4
   digitalWrite(XSHUT4, HIGH);
   delay(150);
   sensor4.init(true);
   delay(100);
-  sensor4.setAddress( (uint8_t) 04);
+  sensor4.setAddress( (uint8_t) 4);
   // init sensor 5
   digitalWrite(XSHUT5, HIGH);
   delay(150);
   sensor5.init(true);
   delay(100);
-  sensor5.setAddress( (uint8_t) 05);
+  sensor5.setAddress( (uint8_t) 5);
 
   Serial.println("sensor addresses set");
 
