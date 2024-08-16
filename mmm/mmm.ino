@@ -1,3 +1,23 @@
+/**********************************************************************************
+
+  - Remove all blocks from sensors
+  - Plugin Arduino
+  - Wait some seconds
+  - Start Ableton or equivilant
+  - All tracks in Ableton have to be DISABLED
+  - Click on PLAY in Ableton (you should hear nothing)
+  - Putting donw a block, should result in enabling the corresponding tracl
+  - You should hear one track per block
+  - Have fun1!
+
+
+  https://youtube.com/@MarkusKnapp
+
+  Markus Knapp - Einfach machen
+
+**********************************************************************************/
+
+
 #include <Wire.h>
 #include <VL53L0X.h> // by Pololu
 #include "MIDIUSB.h"
@@ -45,39 +65,39 @@ bool UP = true;
 bool DOWN = false;
 
 // all tracks
-bool track1 = ON;
-bool track2 = ON;
-bool track3 = ON;
-bool track4 = ON;
-bool track5 = ON;
-bool track6 = ON;
-bool track7 = ON;
-bool track8 = ON;
-bool track9 = ON;
-bool track10 = ON;
-bool track11 = ON;
-bool track12 = ON;
-bool track13 = ON;
-bool track14 = ON;
-bool track15 = ON;
-bool track16 = ON;
+bool track1 = OFF;
+bool track2 = OFF;
+bool track3 = OFF;
+bool track4 = OFF;
+bool track5 = OFF;
+bool track6 = OFF;
+bool track7 = OFF;
+bool track8 = OFF;
+bool track9 = OFF;
+bool track10 = OFF;
+bool track11 = OFF;
+bool track12 = OFF;
+bool track13 = OFF;
+bool track14 = OFF;
+bool track15 = OFF;
+bool track16 = OFF;
 // all wooden blocks
-bool block1 = DOWN;
-bool block2 = DOWN;
-bool block3 = DOWN;
-bool block4 = DOWN;
-bool block5 = DOWN;
-bool block6 = DOWN;
-bool block7 = DOWN;
-bool block8 = DOWN;
-bool block9 = DOWN;
-bool block10 = DOWN;
-bool block11 = DOWN;
-bool block12 = DOWN;
-bool block13 = DOWN;
-bool block14 = DOWN;
-bool block15 = DOWN;
-bool block16 = DOWN;
+bool block1 = UP;
+bool block2 = UP;
+bool block3 = UP;
+bool block4 = UP;
+bool block5 = UP;
+bool block6 = UP;
+bool block7 = UP;
+bool block8 = UP;
+bool block9 = UP;
+bool block10 = UP;
+bool block11 = UP;
+bool block12 = UP;
+bool block13 = UP;
+bool block14 = UP;
+bool block15 = UP;
+bool block16 = UP;
 
 
 // First MIDI parameter is the event type (0x09 = note on, 0x08 = note off)
