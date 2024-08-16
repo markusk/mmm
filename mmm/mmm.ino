@@ -347,6 +347,11 @@ void setup()
 
  // for debugging messageas only
   Serial.begin(115200);
+  while (!Serial)
+  {
+    // Wait for serial (USB) port readiness
+  }
+  Serial.println("Sensor init...");
 
   // init sensor 1
   digitalWrite(XSHUT1, HIGH);
@@ -372,23 +377,36 @@ void setup()
   sensor4.init(true);
   delay(100);
   sensor4.setAddress( (uint8_t) 04);
+/*
   // init sensor 5
   digitalWrite(XSHUT5, HIGH);
   delay(150);
   sensor5.init(true);
   delay(100);
   sensor5.setAddress( (uint8_t) 05);
-
+*/
 
   Serial.println("sensor addresses set");
 
   // start measurements
+  Serial.print("init sensor 1...");
   sensor1.startContinuous();
-  sensor2.startContinuous();
-  sensor3.startContinuous();
-  sensor4.startContinuous();
-  sensor5.startContinuous();
+  Serial.println("done.");
 
+  Serial.print("init sensor 2...");
+  sensor2.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 3...");
+  sensor3.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 4...");
+  sensor4.startContinuous();
+  Serial.println("done.");
+  Serial.print("init sensor 5...");
+  sensor5.startContinuous();
+  Serial.println("done.");
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
 
