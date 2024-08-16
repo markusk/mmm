@@ -52,6 +52,9 @@ VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
 VL53L0X sensor5;
+VL53L0X sensor6;
+VL53L0X sensor7;
+VL53L0X sensor8;
 
 // holds the measurements
 int measure = 0;
@@ -217,10 +220,34 @@ void blockLies(byte block)
       }
       break;
     case 6:
+      if (track6 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track6 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 7:
+      if (track7 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track7 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 8:
+      if (track8 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track8 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 9:
       break;
@@ -298,10 +325,34 @@ void blockIsLifted(byte block)
       }
       break;
     case 6:
+      if (track6 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track6 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 7:
+      if (track7 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track7 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 8:
+      if (track8 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track8 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 9:
       break;
@@ -404,6 +455,24 @@ void setup()
   sensor5.init(true);
   delay(100);
   sensor5.setAddress( (uint8_t) 5);
+  // init sensor 6
+  digitalWrite(XSHUT6, HIGH);
+  delay(150);
+  sensor6.init(true);
+  delay(100);
+  sensor6.setAddress( (uint8_t) 6);
+  // init sensor 7
+  digitalWrite(XSHUT7, HIGH);
+  delay(150);
+  sensor7.init(true);
+  delay(100);
+  sensor7.setAddress( (uint8_t) 7);
+  // init sensor 8
+  digitalWrite(XSHUT8, HIGH);
+  delay(150);
+  sensor8.init(true);
+  delay(100);
+  sensor8.setAddress( (uint8_t) 8);
 
   Serial.println("sensor addresses set");
 
@@ -426,6 +495,18 @@ void setup()
 
   Serial.print("init sensor 5...");
   sensor5.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 6...");
+  sensor6.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 7...");
+  sensor7.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 8...");
+  sensor8.startContinuous();
   Serial.println("done.");
 
   // (times 10 to convert into mm for the sensor measurement)
@@ -573,6 +654,87 @@ void loop()
     block5 = DOWN;
     // PLAY
     blockLies(5);
+  }
+
+  //----------
+  // sensor 6
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor6.readRangeContinuousMillimeters();
+  // Serial.print("sensor 6: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 6 up -> STOP
+    //Serial.println("block 6 UP");
+    block6 = UP;
+    // STOP playing
+    blockIsLifted(6);
+  }
+  else
+  {
+    // block 6 down -> PLAY
+    // Serial.println("block 6 DOWN");
+    block6 = DOWN;
+    // PLAY
+    blockLies(6);
+  }
+
+  //----------
+  // sensor 7
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor7.readRangeContinuousMillimeters();
+  // Serial.print("sensor 7: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 7 up -> STOP
+    //Serial.println("block 7 UP");
+    block7 = UP;
+    // STOP playing
+    blockIsLifted(7);
+  }
+  else
+  {
+    // block 7 down -> PLAY
+    // Serial.println("block 7 DOWN");
+    block7 = DOWN;
+    // PLAY
+    blockLies(7);
+  }
+
+  //----------
+  // sensor 8
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor8.readRangeContinuousMillimeters();
+  // Serial.print("sensor 8: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > 200)
+  {
+    // block 8 up -> STOP
+    //Serial.println("block 8 UP");
+    block8 = UP;
+    // STOP playing
+    blockIsLifted(8);
+  }
+  else
+  {
+    // block 8 down -> PLAY
+    // Serial.println("block 8 DOWN");
+    block8 = DOWN;
+    // PLAY
+    blockLies(8);
   }
 
 }
