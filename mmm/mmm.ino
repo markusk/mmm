@@ -59,6 +59,10 @@ VL53L0X sensor9;
 VL53L0X sensor10;
 VL53L0X sensor11;
 VL53L0X sensor12;
+VL53L0X sensor13;
+VL53L0X sensor14;
+VL53L0X sensor15;
+VL53L0X sensor16;
 
 // holds the measurements
 int measure = 0;
@@ -294,12 +298,44 @@ void blockLies(byte block)
       }
       break;
     case 13:
+      if (track13 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track13 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 14:
+      if (track14 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track14 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 15:
+      if (track15 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track15 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 16:
+      if (track16 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track16 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
   }
 }
@@ -431,12 +467,44 @@ void blockIsLifted(byte block)
       }
       break;
     case 13:
+      if (track13 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track13 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 14:
+      if (track14 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track14 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 15:
+      if (track15 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track15 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 16:
+      if (track16 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track16 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
   }
 }
@@ -565,6 +633,30 @@ void setup()
   sensor12.init(true);
   delay(100);
   sensor12.setAddress( (uint8_t) 12);
+  // init sensor 13
+  digitalWrite(XSHUT13, HIGH);
+  delay(150);
+  sensor13.init(true);
+  delay(100);
+  sensor13.setAddress( (uint8_t) 13);
+  // init sensor 14
+  digitalWrite(XSHUT14, HIGH);
+  delay(150);
+  sensor14.init(true);
+  delay(100);
+  sensor14.setAddress( (uint8_t) 14);
+  // init sensor 15
+  digitalWrite(XSHUT15, HIGH);
+  delay(150);
+  sensor15.init(true);
+  delay(100);
+  sensor15.setAddress( (uint8_t) 15);
+  // init sensor 16
+  digitalWrite(XSHUT16, HIGH);
+  delay(150);
+  sensor16.init(true);
+  delay(100);
+  sensor16.setAddress( (uint8_t) 16);
 
   Serial.println("sensor addresses set");
 
@@ -615,6 +707,22 @@ void setup()
 
   Serial.print("init sensor 12...");
   sensor12.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 13...");
+  sensor13.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 14...");
+  sensor14.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 15...");
+  sensor15.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 16...");
+  sensor16.startContinuous();
   Serial.println("done.");
 
   // (times 10 to convert into mm for the sensor measurement)
