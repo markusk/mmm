@@ -3,7 +3,8 @@
   - Remove all blocks from sensors
   - Plugin Arduino
   - Wait some seconds
-  - Start Ableton or equivilant
+  - Start Ableton LIVE or equivilant
+    > File > Open Recent Set > mmm-set 16 Spuren 
   - All tracks in Ableton have to be DISABLED
   - Click on PLAY in Ableton (you should hear nothing)
   - Putting donw a block, should result in enabling the corresponding tracl
@@ -40,8 +41,12 @@
 #define XSHUT15  7
 #define XSHUT16  8
 
+
+//*******************************************************
 // distance in mm when a block is recognised as "UP"
-int blockThreshold = 20;
+int blockThreshold = 10;
+//*******************************************************
+
 
 // this is the base note for sensor1, all following sensor notes will be increased by 1
 byte baseNote = 48;
@@ -774,7 +779,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 2 up -> STOP
     //Serial.println("block 2 UP");
@@ -801,7 +806,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 3 up -> STOP
     //Serial.println("block 3 UP");
@@ -828,7 +833,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 4 up -> STOP
     //Serial.println("block 4 UP");
@@ -855,7 +860,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 5 up -> STOP
     //Serial.println("block 5 UP");
@@ -882,7 +887,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 6 up -> STOP
     //Serial.println("block 6 UP");
@@ -909,7 +914,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 7 up -> STOP
     //Serial.println("block 7 UP");
@@ -936,7 +941,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 8 up -> STOP
     //Serial.println("block 8 UP");
@@ -963,7 +968,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 9 up -> STOP
     //Serial.println("block 9 UP");
@@ -990,7 +995,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 10 up -> STOP
     //Serial.println("block 10 UP");
@@ -1017,7 +1022,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 11 up -> STOP
     //Serial.println("block 11 UP");
@@ -1044,7 +1049,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 12 up -> STOP
     //Serial.println("block 12 UP");
@@ -1072,7 +1077,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 13 up -> STOP
     //Serial.println("block 13 UP");
@@ -1099,7 +1104,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 14 up -> STOP
     //Serial.println("block 14 UP");
@@ -1126,7 +1131,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 15 up -> STOP
     //Serial.println("block 15 UP");
@@ -1153,7 +1158,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 16 up -> STOP
     //Serial.println("block 16 UP");
