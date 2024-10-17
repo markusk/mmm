@@ -21,10 +21,11 @@
 
 #include <Wire.h>
 #include <VL53L0X.h> // by Pololu
-#include "MIDIUSB.h"
+//#include "MIDIUSB.h"
 
 // set the pins to shutdown pin of each sensor
-#define XSHUT1  15
+#define XSHUT1  3
+/*
 #define XSHUT2  16
 #define XSHUT3  17
 #define XSHUT4  18
@@ -40,7 +41,7 @@
 #define XSHUT14  6
 #define XSHUT15  7
 #define XSHUT16  8
-
+*/
 
 //*******************************************************
 // distance in mm when a block is recognised as "UP"
@@ -53,6 +54,7 @@ byte baseNote = 48;
 
 // the sensors
 VL53L0X sensor1;
+/*
 VL53L0X sensor2;
 VL53L0X sensor3;
 VL53L0X sensor4;
@@ -68,6 +70,7 @@ VL53L0X sensor13;
 VL53L0X sensor14;
 VL53L0X sensor15;
 VL53L0X sensor16;
+*/
 
 // holds the measurements
 int measure = 0;
@@ -124,9 +127,10 @@ bool block16 = UP;
 // Fourth parameter is the velocity (64 = normal, 127 = fastest).
 void noteOn(byte channel, byte pitch, byte velocity)
 {
+  /*
   midiEventPacket_t noteOn = {0x09, 0x90 | channel, pitch, velocity};
   MidiUSB.sendMIDI(noteOn);
-
+*/
   // fancy LED blinking...
   digitalWrite(LED_BUILTIN, HIGH);
 }
@@ -134,9 +138,10 @@ void noteOn(byte channel, byte pitch, byte velocity)
 
 void noteOff(byte channel, byte pitch, byte velocity)
 {
+  /*
   midiEventPacket_t noteOff = {0x08, 0x80 | channel, pitch, velocity};
   MidiUSB.sendMIDI(noteOff);
-
+*/
   // fancy LED blinking...
   digitalWrite(LED_BUILTIN, LOW);
 }
@@ -147,14 +152,17 @@ void noteOff(byte channel, byte pitch, byte velocity)
 // Third parameter is the control value (0-127).
 void controlChange(byte channel, byte control, byte value)
 {
+/*
   midiEventPacket_t event = {0x0B, 0xB0 | channel, control, value};
   MidiUSB.sendMIDI(event);
+*/
 }
 
 
 // turn the given note on and off with some delay
 void toggleNote(byte note)
 {
+/*
   //----------
   // NOTE on
   //----------
@@ -174,6 +182,7 @@ void toggleNote(byte note)
   MidiUSB.flush();
   // Avoid  bouncing
   delay(noteBounceDelay);
+*/
 }
 
 
@@ -521,6 +530,7 @@ void setup()
 
   // set shurdown pins to output
   pinMode(XSHUT1, OUTPUT);
+/*
   pinMode(XSHUT2, OUTPUT);
   pinMode(XSHUT3, OUTPUT);
   pinMode(XSHUT4, OUTPUT);
@@ -536,8 +546,10 @@ void setup()
   pinMode(XSHUT14, OUTPUT);
   pinMode(XSHUT15, OUTPUT);
   pinMode(XSHUT16, OUTPUT);
+*/
   // all sensors in standby
   digitalWrite(XSHUT1, LOW);
+/*
   digitalWrite(XSHUT2, LOW);
   digitalWrite(XSHUT3, LOW);
   digitalWrite(XSHUT4, LOW);
@@ -553,6 +565,7 @@ void setup()
   digitalWrite(XSHUT14, LOW);
   digitalWrite(XSHUT15, LOW);
   digitalWrite(XSHUT16, LOW);
+*/
 
   delay(500);
   Wire.begin();
@@ -572,6 +585,8 @@ void setup()
   sensor1.init(true);
   delay(100);
   sensor1.setAddress( (uint8_t) 1);
+
+  /*
   // init sensor 2
   digitalWrite(XSHUT2, HIGH);
   delay(150);
@@ -662,6 +677,7 @@ void setup()
   sensor16.init(true);
   delay(100);
   sensor16.setAddress( (uint8_t) 16);
+*/
 
   Serial.println("sensor addresses set");
 
@@ -670,6 +686,7 @@ void setup()
   sensor1.startContinuous();
   Serial.println("done.");
 
+/*
   Serial.print("init sensor 2...");
   sensor2.startContinuous();
   Serial.println("done.");
@@ -729,6 +746,7 @@ void setup()
   Serial.print("init sensor 16...");
   sensor16.startContinuous();
   Serial.println("done.");
+*/
 
   // (times 10 to convert into mm for the sensor measurement)
   blockThreshold *= 10;
@@ -769,6 +787,7 @@ void loop()
     blockLies(1);
   }
 
+/*
   //----------
   // sensor 2
   //----------
@@ -1174,4 +1193,6 @@ void loop()
     // PLAY
     blockLies(16);
   }
+*/
+
 }
