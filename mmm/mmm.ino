@@ -19,6 +19,30 @@
 **********************************************************************************/
 
 
+
+/*---------------- LED test --------------------------*/
+#include <Adafruit_NeoPixel.h>
+#ifdef __AVR__
+ #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
+#endif
+
+// Which pin on the Arduino is connected to the NeoPixels?
+#define PIN        6 // On Trinket or Gemma, suggest changing this to 1
+
+// How many NeoPixels are attached to the Arduino?
+#define NUMPIXELS 12 // Popular NeoPixel ring size
+
+// When setting up the NeoPixel library, we tell it how many pixels,
+// and which pin to use to send signals. Note that for older NeoPixel
+// strips you might need to change the third parameter -- see the
+// strandtest example for more information on possible values.
+Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
+
+#define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
+/*---------------- LED test --------------------------*/
+
+
+
 #include <Wire.h>
 #include <VL53L0X.h> // by Pololu
 //#include "MIDIUSB.h"
@@ -755,7 +779,41 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
   // LED on - We are ready!
   digitalWrite(LED_BUILTIN, HIGH);
+
+
+
+/*---------------- LED test --------------------------*/
+    // These lines are specifically to support the Adafruit Trinket 5V 16 MHz.
+  // Any other board, you can remove this part (but no harm leaving it):
+#if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
+  clock_prescale_set(clock_div_1);
+#endif
+  // END of Trinket-specific code.
+  Serial.print("init LED ring...");
+  pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  Serial.println("done.");
+
+  Serial.print("All LEDs off...");
+  pixels.clear(); // Set all pixel colors to 'off'
+/*---------------- LED test --------------------------*/
+
 }
+
+
+void LED(bool onOff)
+{
+  // The first NeoPixel in a strand is #0, second is 1, all the way up
+  // to the count of pixels minus one.
+  for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
+
+    // pixels.Color() takes RGB values, from 0,0,0 up to 255,255,255
+    // Here we're using a moderately bright green color:
+    pixels.setPixelColor(i, pixels.Color(0, 150, 0));
+
+    pixels.show();   // Send the updated pixel colors to the hardware.
+  }
+}
+
 
 
 void loop()
@@ -783,6 +841,10 @@ void loop()
     // block 1 down -> PLAY
     // Serial.println("block 1 DOWN");
     block1 = DOWN;
+
+    // LEDs on
+    LED(ON);
+
     // PLAY
     blockLies(1);
   }
