@@ -800,18 +800,25 @@ void setup()
 }
 
 
-void LED(bool onOff)
+void LED(bool on)
 {
   // The first NeoPixel in a strand is #0, second is 1, all the way up
   // to the count of pixels minus one.
   for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
 
+  if (on == ON)
+  {
     // pixels.Color() takes RGB values, from 0,0,0 up to 255,255,255
-    // Here we're using a moderately bright green color:
-    pixels.setPixelColor(i, pixels.Color(0, 150, 0));
-
-    pixels.show();   // Send the updated pixel colors to the hardware.
+    // GREEN
+    pixels.setPixelColor(i, pixels.Color(0, 150, 0));    
   }
+  else
+    // pixels.Color() takes RGB values, from 0,0,0 up to 255,255,255
+    // RED
+    pixels.setPixelColor(i, pixels.Color(150, 0, 0));    
+  }
+
+  pixels.show();   // Send the updated pixel colors to the hardware.
 }
 
 
@@ -833,6 +840,10 @@ void loop()
     // block 1 up -> STOP
     //Serial.println("block 1 UP");
     block1 = UP;
+
+    // LEDs off
+    LED(OFF);
+
     // STOP playing
     blockIsLifted(1);
   }
