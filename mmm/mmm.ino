@@ -4,11 +4,13 @@
   - Plugin Arduino
   - Wait some seconds
   - Start Ableton or equivilant
+  - Open Ableton Live Set (i.e. "mmm-set - 16 Spuren.als")
+  - Check Ableton Midi Settings (Enable Input Ports for Arduino for Track AND Remote)
   - All tracks in Ableton have to be DISABLED
-  - Click on PLAY in Ableton (you should hear nothing)
-  - Putting donw a block, should result in enabling the corresponding tracl
+  - Click on PLAY in Ableton (you should hear nothing!)
+  - Putting donw a block, should result in enabling the corresponding track
   - You should hear one track per block
-  - Have fun1!
+  - Have fun! :-)
 
 
   https://youtube.com/@MarkusKnapp
