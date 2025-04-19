@@ -1,11 +1,11 @@
 /**********************************************************************************
 
-  - Remove all blocks from sensors
+  - Remove all blocks from all sensors!
   - Plugin Arduino
   - Wait some seconds
   - Start Ableton or equivilant
-  - Open Ableton Live Set (i.e. "mmm-set - 16 Spuren.als")
-  - Check Ableton Midi Settings (Enable Input Ports for Arduino for Track AND Remote)
+    > File > Open Recent Set > "mmm-set 16 Spuren.als" (or eqivalent)
+  - Check Ableton Midi Settings (Enable 'Input Ports' for the Arduino for Track *and* Remote)
   - All tracks in Ableton have to be DISABLED
   - Click on PLAY in Ableton (you should hear nothing!)
   - Putting donw a block, should result in enabling the corresponding track
@@ -42,8 +42,12 @@
 #define XSHUT15  7
 #define XSHUT16  8
 
+
+//*******************************************************
 // distance in mm when a block is recognised as "UP"
-int blockThreshold = 20;
+int blockThreshold = 10;
+//*******************************************************
+
 
 // this is the base note for sensor1, all following sensor notes will be increased by 1
 byte baseNote = 48;
@@ -57,6 +61,14 @@ VL53L0X sensor5;
 VL53L0X sensor6;
 VL53L0X sensor7;
 VL53L0X sensor8;
+VL53L0X sensor9;
+VL53L0X sensor10;
+VL53L0X sensor11;
+VL53L0X sensor12;
+VL53L0X sensor13;
+VL53L0X sensor14;
+VL53L0X sensor15;
+VL53L0X sensor16;
 
 // holds the measurements
 int measure = 0;
@@ -252,20 +264,84 @@ void blockLies(byte block)
       }
       break;
     case 9:
+      if (track9 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track9 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 10:
+      if (track10 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track10 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 11:
+      if (track11 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track11 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 12:
+      if (track12 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track12 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 13:
+      if (track13 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track13 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 14:
+      if (track14 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track14 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 15:
+      if (track15 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track15 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
     case 16:
+      if (track16 == OFF)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track16 = ON;
+        Serial.println(String("Track " + String(block) + " turned ON."));
+      }
       break;
   }
 }
@@ -357,20 +433,84 @@ void blockIsLifted(byte block)
       }
       break;
     case 9:
+      if (track9 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track9 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 10:
+      if (track10 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track10 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 11:
+      if (track11 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track11 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 12:
+      if (track12 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track12 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 13:
+      if (track13 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track13 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 14:
+      if (track14 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track14 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 15:
+      if (track15 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track15 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
     case 16:
+      if (track16 == ON)
+      {
+        // play next note
+        toggleNote(baseNote + block);
+        // store track state
+        track16 = OFF;
+        Serial.println(String("Track " + String(block) + " turned OFF."));
+      }
       break;
   }
 }
@@ -475,6 +615,54 @@ void setup()
   sensor8.init(true);
   delay(100);
   sensor8.setAddress( (uint8_t) 8);
+  // init sensor 9
+  digitalWrite(XSHUT9, HIGH);
+  delay(150);
+  sensor9.init(true);
+  delay(100);
+  sensor9.setAddress( (uint8_t) 9);
+  // init sensor 10
+  digitalWrite(XSHUT10, HIGH);
+  delay(150);
+  sensor10.init(true);
+  delay(100);
+  sensor10.setAddress( (uint8_t) 10);
+  // init sensor 11
+  digitalWrite(XSHUT11, HIGH);
+  delay(150);
+  sensor11.init(true);
+  delay(100);
+  sensor11.setAddress( (uint8_t) 11);
+  // init sensor 12
+  digitalWrite(XSHUT12, HIGH);
+  delay(150);
+  sensor12.init(true);
+  delay(100);
+  sensor12.setAddress( (uint8_t) 12);
+  // init sensor 13
+  digitalWrite(XSHUT13, HIGH);
+  delay(150);
+  sensor13.init(true);
+  delay(100);
+  sensor13.setAddress( (uint8_t) 13);
+  // init sensor 14
+  digitalWrite(XSHUT14, HIGH);
+  delay(150);
+  sensor14.init(true);
+  delay(100);
+  sensor14.setAddress( (uint8_t) 14);
+  // init sensor 15
+  digitalWrite(XSHUT15, HIGH);
+  delay(150);
+  sensor15.init(true);
+  delay(100);
+  sensor15.setAddress( (uint8_t) 15);
+  // init sensor 16
+  digitalWrite(XSHUT16, HIGH);
+  delay(150);
+  sensor16.init(true);
+  delay(100);
+  sensor16.setAddress( (uint8_t) 16);
 
   Serial.println("sensor addresses set");
 
@@ -509,6 +697,38 @@ void setup()
 
   Serial.print("init sensor 8...");
   sensor8.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 9...");
+  sensor9.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 10...");
+  sensor10.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 11...");
+  sensor11.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 12...");
+  sensor12.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 13...");
+  sensor13.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 14...");
+  sensor14.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 15...");
+  sensor15.startContinuous();
+  Serial.println("done.");
+
+  Serial.print("init sensor 16...");
+  sensor16.startContinuous();
   Serial.println("done.");
 
   // (times 10 to convert into mm for the sensor measurement)
@@ -560,7 +780,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 2 up -> STOP
     //Serial.println("block 2 UP");
@@ -587,7 +807,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 3 up -> STOP
     //Serial.println("block 3 UP");
@@ -614,7 +834,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 4 up -> STOP
     //Serial.println("block 4 UP");
@@ -641,7 +861,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 5 up -> STOP
     //Serial.println("block 5 UP");
@@ -668,7 +888,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 6 up -> STOP
     //Serial.println("block 6 UP");
@@ -695,7 +915,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 7 up -> STOP
     //Serial.println("block 7 UP");
@@ -722,7 +942,7 @@ void loop()
   // Serial.println(" mm");
 
   // block up or down?
-  if (measure > 200)
+  if (measure > blockThreshold)
   {
     // block 8 up -> STOP
     //Serial.println("block 8 UP");
@@ -739,4 +959,220 @@ void loop()
     blockLies(8);
   }
 
+  //----------
+  // sensor 9
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor9.readRangeContinuousMillimeters();
+  // Serial.print("sensor 9: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 9 up -> STOP
+    //Serial.println("block 9 UP");
+    block9 = UP;
+    // STOP playing
+    blockIsLifted(9);
+  }
+  else
+  {
+    // block 9 down -> PLAY
+    // Serial.println("block 9 DOWN");
+    block9 = DOWN;
+    // PLAY
+    blockLies(9);
+  }
+
+  //----------
+  // sensor 10
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor10.readRangeContinuousMillimeters();
+  // Serial.print("sensor 10: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 10 up -> STOP
+    //Serial.println("block 10 UP");
+    block10 = UP;
+    // STOP playing
+    blockIsLifted(10);
+  }
+  else
+  {
+    // block 10 down -> PLAY
+    // Serial.println("block 10 DOWN");
+    block10 = DOWN;
+    // PLAY
+    blockLies(10);
+  }
+
+  //----------
+  // sensor 11
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor11.readRangeContinuousMillimeters();
+  // Serial.print("sensor 11: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 11 up -> STOP
+    //Serial.println("block 11 UP");
+    block11 = UP;
+    // STOP playing
+    blockIsLifted(11);
+  }
+  else
+  {
+    // block 11 down -> PLAY
+    // Serial.println("block 11 DOWN");
+    block11 = DOWN;
+    // PLAY
+    blockLies(11);
+  }
+
+  //----------
+  // sensor 12
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor12.readRangeContinuousMillimeters();
+  // Serial.print("sensor 12: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 12 up -> STOP
+    //Serial.println("block 12 UP");
+    block12 = UP;
+    // STOP playing
+    blockIsLifted(12);
+  }
+  else
+  {
+    // block 12 down -> PLAY
+    // Serial.println("block 12 DOWN");
+    block12 = DOWN;
+    // PLAY
+    blockLies(12);
+  }
+
+
+  //----------
+  // sensor 13
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor13.readRangeContinuousMillimeters();
+  // Serial.print("sensor 13: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 13 up -> STOP
+    //Serial.println("block 13 UP");
+    block13 = UP;
+    // STOP playing
+    blockIsLifted(13);
+  }
+  else
+  {
+    // block 13 down -> PLAY
+    // Serial.println("block 13 DOWN");
+    block13 = DOWN;
+    // PLAY
+    blockLies(13);
+  }
+
+  //----------
+  // sensor 14
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor14.readRangeContinuousMillimeters();
+  // Serial.print("sensor 14: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 14 up -> STOP
+    //Serial.println("block 14 UP");
+    block14 = UP;
+    // STOP playing
+    blockIsLifted(14);
+  }
+  else
+  {
+    // block 14 down -> PLAY
+    // Serial.println("block 14 DOWN");
+    block14 = DOWN;
+    // PLAY
+    blockLies(14);
+  }
+
+  //----------
+  // sensor 15
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor15.readRangeContinuousMillimeters();
+  // Serial.print("sensor 15: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 15 up -> STOP
+    //Serial.println("block 15 UP");
+    block15 = UP;
+    // STOP playing
+    blockIsLifted(15);
+  }
+  else
+  {
+    // block 15 down -> PLAY
+    // Serial.println("block 15 DOWN");
+    block15 = DOWN;
+    // PLAY
+    blockLies(15);
+  }
+
+  //----------
+  // sensor 16
+  //----------
+  //Serial.print("Reading a measurement... ");
+  measure = sensor16.readRangeContinuousMillimeters();
+  // Serial.print("sensor 16: ");
+  // Serial.print(measure);
+  // Serial.println(" mm");
+
+  // block up or down?
+  if (measure > blockThreshold)
+  {
+    // block 16 up -> STOP
+    //Serial.println("block 16 UP");
+    block16 = UP;
+    // STOP playing
+    blockIsLifted(16);
+  }
+  else
+  {
+    // block 16 down -> PLAY
+    // Serial.println("block 16 DOWN");
+    block16 = DOWN;
+    // PLAY
+    blockLies(16);
+  }
 }
